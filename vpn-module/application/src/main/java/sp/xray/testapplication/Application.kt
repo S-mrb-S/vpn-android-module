@@ -4,7 +4,7 @@ import androidx.work.Configuration
 import com.tencent.mmkv.MMKV
 import sp.xray.lite.AngApplication
 
-class Application : AngApplication() {
+class Application : sp.vpn.module.VpnApplication() {
     override fun mmkvInit() {
         MMKV.initialize(this)
     }
@@ -17,5 +17,17 @@ class Application : AngApplication() {
         return Configuration.Builder()
             .setDefaultProcessName("${BuildConfig.APPLICATION_ID}:bg")
             .build()
+    }
+
+    override fun getContentTitle(): String {
+        return "testapplication"
+    }
+
+    override fun getChannelID(): String {
+        return "sp.xray.testapplication"
+    }
+
+    override fun getChannelIDName(): String {
+        return "spxraytestapplication"
     }
 }

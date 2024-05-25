@@ -42,7 +42,7 @@ android {
 
     flavorDimensions = ["dim"]
     productFlavors {
-        fdroid {
+        sp {
             dimension "dim"
         }
     }
@@ -50,10 +50,10 @@ android {
 
 dependencies {
    // implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api "sp.v2ray:core"
+
     implementation libs.localbroadcastmanager
     implementation libs.appcompat
-
-    api "sp.v2ray:xray-core"
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit

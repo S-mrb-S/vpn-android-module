@@ -30,6 +30,12 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    flavorDimensions += listOf("dim")
+    productFlavors {
+        create("sp") {
+            dimension = "dim"
+        }
+    }
 }
 
 dependencies {

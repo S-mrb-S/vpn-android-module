@@ -24,7 +24,7 @@ android {
     }
     flavorDimensions = ["dim"]
     productFlavors {
-        fdroid {
+        sp {
             dimension "dim"
         }
     }

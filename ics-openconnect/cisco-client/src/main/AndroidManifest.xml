@@ -98,7 +98,6 @@
         <service
             android:name="sp.openconnect.core.OpenVpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
-            android:process=":openconnect"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.net.VpnService" />
@@ -133,7 +132,7 @@
 
         <receiver android:name=".OnBootReceiver"
             android:exported="true">
-            <intent-filter android:priority="666">
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
