@@ -3,6 +3,7 @@ package sp.xray.testapplication
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -28,6 +29,17 @@ class MainActivity : sp.vpn.module.VpnActivity() {
     }
 
     override fun onResume() {
+        Toast.makeText(this@MainActivity, "s 1", Toast.LENGTH_SHORT).show()
+
+        GlobalScope.launch {
+            delay(5000)
+
+            this@MainActivity.runOnUiThread {
+                Toast.makeText(this@MainActivity, "s 2", Toast.LENGTH_SHORT).show()
+                this@MainActivity.addAndConnectV2ray("vless://dd8ef5af-5940-2c1f-396e-fcafdf97414c@81.12.92.130:15404?security=&alpn=h2,http/1.1&fp=random&type=tcp&path=/&headerType=http&host=&encryption=none#%F0%9F%87%B3%F0%9F%87%B1%20@iProxyRobot%20[NL-TUN-3x]")
+            }
+        }
+
         super.onResume()
     }
 

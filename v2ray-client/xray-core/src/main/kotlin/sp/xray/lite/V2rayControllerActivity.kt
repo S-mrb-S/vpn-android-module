@@ -111,19 +111,18 @@ abstract class V2rayControllerActivity : BaseActivity() {
     }
 
     protected fun addAndConnectV2ray(config: String): Boolean {
-        if (this.delAndAddV2rayConfig(config)) {
-            if (forceV2rayStop()) {
-                val intent = VpnService.prepare(this)
-                return if (intent == null) {
-                    startV2Ray()
-                    true
-                } else {
-                    requestVpnPermission.launch(intent)
-                    true
-                }
-            }
+        Log.d("MRB 2", "22")
+        delAndAddV2rayConfig(config)
+        Log.d("MRB 2", "233")
+        forceV2rayStop()
+        val intent = VpnService.prepare(this)
+        return if (intent == null) {
+            startV2Ray()
+            true
+        } else {
+            requestVpnPermission.launch(intent)
+            true
         }
-        return false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -282,10 +281,11 @@ abstract class V2rayControllerActivity : BaseActivity() {
         try {
             MmkvManager.removeAllServer()
             mainViewModel.reloadServerList()
-        } catch (e: Exception) {
-            return false
+        } catch (ignore: Exception) {
+//            return false
         }
 
+        Log.d("MRB 2", "2")
         importBatchConfig(AConfig)
         return true
     }
@@ -405,6 +405,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
     }
 
     private fun importBatchConfig(server: String?, subid: String = "") {
+        Log.d("MRB 2", "3")
         val subid2 = if (subid.isNullOrEmpty()) {
             mainViewModel.subscriptionId
         } else {
