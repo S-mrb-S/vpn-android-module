@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">地点</string>
+  <string name="cant_read_folder">无法读取目录</string>
+  <string name="cancel">取消</string>
+  <string name="no_data">无数据</string>
+  <string name="client_certificate_title">客户端证书</string>
+  <string name="vpn_list_title">配置文件</string>
+  <string name="file_select">请选择...</string>
+  <string name="file_nothing_selected">您必须选择一个文件</string>
+  <string name="configure_the_vpn">配置 VPN</string>
+  <string name="menu_add_profile">添加配置文件</string>
+  <string name="clear_log">清除日志</string>
+  <string name="remove_vpn">删除 VPN</string>
+  <string name="remove_vpn_query">移除 VPN 配置文件 \'%s\' 吗？</string>
+  <string name="clear">清除</string>
+  <string name="send_logfile">发送日志文件</string>
+  <string name="send">发送</string>
+  <string name="copied_entry">日志条目已复制剪贴板</string>
+  <string name="faq">常见问题</string>
+  <string name="file_explorer_tab">文件浏览器</string>
+  <string name="inline_file_tab">内联文件</string>
+  <string name="error_importing_file">导入文件出错</string>
+  <string name="import_error_message">无法导入文件系统文件</string>
+  <string name="inline_file_data">[[内联文件数据]]</string>
+  <string name="speed_waiting">等待状态消息</string>
+  <string name="file_icon">文件图标</string>
+  <string name="generalsettings">设置</string>
+  <string name="owner_fix_summary">尝试设定 /dev/tun 的属主为 system。一些 CM9 ROM 需要它以使 VPNService API 工作。本操作需要 root 权限。</string>
+  <string name="owner_fix">修复 /dev/tun 的权限</string>
+  <string name="edit_profile_title">编辑 %s</string>
+  <string name="netchange_summary">启用该选项以在网络变化(例如从蜂窝数据到 WiFi)时强制重新连接</string>
+  <string name="netchange">当转换网络时重新连接</string>
+  <string name="netstatus">网络状态：</string>
+  <string name="select_file">选择</string>
+  <string name="advanced">高级设置</string>
+  <string name="setting_loadtun_summary">尝试在连接之前加载 tun.ko 内核模块。需要 root 权限。</string>
+  <string name="setting_loadtun">载入 tun 模块</string>
+  <string name="getproxy_error">获取代理设置时出错：%s</string>
+  <string name="no_vpn_profiles_defined">没有定义 VPN 配置文件</string>
+  <string name="add_new_vpn_hint">点击 &lt;img src=\"ic_menu_add\"/&gt; 图标添加新的 VPN 配置</string>
+  <string name="send_minidump">向开发者发送转储信息</string>
+  <string name="send_minidump_summary">向开发人员发送上次崩溃的调试信息</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">切换时间戳</string>
+  <string name="make_selection_inline">复制进配置文件</string>
+  <string name="add">添加</string>
+  <string name="prompt">%1$s 正在试图控制 %2$s</string>
+  <string name="remote_warning">如果继续，你将允许该应用完全控制 OpenConnect for Android，并拦截所有网络流量。<b>除非你信任该应用，否则请不要继续。</b>如果该应用是恶意应用，你需要自行承担所有的后果。</string>
+  <string name="remote_trust">我信任此应用。</string>
+  <string name="no_external_app_allowed">没有允许使用外部 API 的应用</string>
+  <string name="allowed_apps">已授权的应用：%s</string>
+  <string name="clearappsdialog">清除已授权的应用列表？\n当前已授权的应用：\n\n%s</string>
+  <!--OpenConnect preference strings-->
+</resources>

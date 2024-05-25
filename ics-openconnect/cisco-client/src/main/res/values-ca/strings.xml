@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Lloc</string>
+  <string name="cancel">Cancel·la</string>
+  <string name="no_data">Sense informació</string>
+  <string name="client_certificate_title">Certificat Client</string>
+  <string name="file_select">Selecciona…</string>
+  <string name="configure_the_vpn">Configura la VPN</string>
+  <string name="menu_add_profile">Afegeix un perfil</string>
+  <string name="clear_log">Neteja el registre</string>
+  <string name="remove_vpn">Eliminar VPN</string>
+  <string name="clear">Neteja</string>
+  <string name="send_logfile">Envia el fitxer de registre</string>
+  <string name="send">Envia</string>
+  <string name="copied_entry">S\'ha copiat l\'entrada al porta-retalls</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Explorador de fitxers</string>
+  <string name="inline_file_tab">Fitxer en linea</string>
+  <string name="error_importing_file">Error important el fitxer</string>
+  <string name="import_error_message">No s\'ha pogut importar el fitxer del sistema de fitxers</string>
+  <string name="inline_file_data">[[Inline file data]]</string>
+  <string name="speed_waiting">Esperant el missatge d\'estat…</string>
+  <string name="file_icon">Icona del fitxer</string>
+  <string name="owner_fix">Corregir els permisos de /dev/tun</string>
+  <string name="edit_profile_title">Editant \"%s\"</string>
+  <string name="netchange">Reconecta al canviar de xarxa</string>
+  <string name="netstatus">Estat de la xarxa:</string>
+  <string name="select_file">Selecciona</string>
+  <string name="advanced">Avançat</string>
+  <string name="no_vpn_profiles_defined">No s\'han definit cap perfil.</string>
+  <!--OpenConnect preference strings-->
+</resources>

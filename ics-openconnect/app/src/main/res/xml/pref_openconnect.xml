@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/server"
+        android:key="pref_key_server">
+        <EditTextPreference
+            android:key="profile_name"
+            android:title="@string/profile_name"
+            android:inputType="text|textNoSuggestions|textCapSentences"
+            android:defaultValue="" />
+        <EditTextPreference
+            android:key="server_address"
+            android:title="@string/server_address"
+            android:dialogMessage="@string/add_profile_hostname_prompt"
+            android:inputType="textUri"
+            android:defaultValue="" />
+        <app.openconnect.ShowTextPreference
+            android:key="ca_certificate"
+            android:title="@string/ca_certificate"
+            android:defaultValue="" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/authentication"
+        android:key="pref_key_authentication">
+        <app.openconnect.ShowTextPreference
+            android:key="user_certificate"
+            android:title="@string/user_certificate"
+            android:defaultValue="" />
+        <app.openconnect.ShowTextPreference
+            android:key="private_key"
+            android:title="@string/private_key"
+            android:defaultValue="" />
+        <ListPreference
+            android:key="software_token"
+            android:title="@string/software_token"
+            android:dialogTitle="@string/software_token"
+            android:entries="@array/software_token_entries"
+            android:entryValues="@array/software_token_values"
+            android:defaultValue="disabled" />
+        <app.openconnect.ShowTextPreference
+            android:key="token_string"
+            android:title="@string/token_string"
+            android:defaultValue="" />
+        <CheckBoxPreference
+            android:key="disable_username_caching"
+            android:title="@string/disable_username_caching"
+            android:summary="@string/disable_username_caching_summary"
+            android:defaultValue="false" />
+        <app.openconnect.ClearPasswordPreference
+            android:key="clear_saved_passwords"
+            android:title="@string/clear_saved_passwords"
+            android:dialogTitle="@string/clear_saved_passwords"
+            android:dialogMessage="@string/clear_saved_passwords_confirm"
+            android:negativeButtonText="@string/no"
+            android:positiveButtonText="@string/yes"
+            android:defaultValue="" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/advanced"
+        android:key="pref_key_advanced">
+        <ListPreference
+            android:key="batch_mode"
+            android:title="@string/batch_mode"
+            android:dialogTitle="@string/batch_mode"
+            android:entries="@array/batch_mode_entries"
+            android:entryValues="@array/batch_mode_values"
+            android:defaultValue="disabled" />
+        <ListPreference
+            android:key="reported_os"
+            android:title="@string/reported_os"
+            android:dialogTitle="@string/reported_os"
+            android:entries="@array/reported_os_entries"
+            android:entryValues="@array/reported_os_values"
+            android:defaultValue="android" />
+        <app.openconnect.ShowTextPreference
+            android:key="custom_csd_wrapper"
+            android:title="@string/custom_csd_wrapper"
+            android:defaultValue="" />
+        <ListPreference
+            android:key="split_tunnel_mode"
+            android:title="@string/split_tunnel_mode"
+            android:dialogTitle="@string/split_tunnel_mode"
+            android:entries="@array/split_tunnel_mode_entries"
+            android:entryValues="@array/split_tunnel_mode_values"
+            android:defaultValue="auto" />
+        <EditTextPreference
+            android:key="split_tunnel_networks"
+            android:title="@string/split_tunnel_networks"
+            android:dialogMessage="@string/split_tunnel_networks_message"
+            android:inputType="textUri|textMultiLine"
+            android:defaultValue="" />
+        <CheckBoxPreference
+            android:key="disable_xml_post"
+            android:title="@string/disable_xml_post"
+            android:summary="@string/disable_xml_post_summary"
+            android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="require_pfs"
+            android:title="@string/require_pfs"
+            android:summary="@string/require_pfs_summary"
+            android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="dpd_override"
+            android:title="@string/dpd_override"
+            android:summary="@string/dpd_override_summary"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:key="dpd_value"
+            android:title="@string/dpd_value"
+            android:dependency="dpd_override"
+            android:dialogMessage="@string/dpd_value_message"
+            android:inputType="number"
+            android:defaultValue="" />
+    </PreferenceCategory>
+</PreferenceScreen>

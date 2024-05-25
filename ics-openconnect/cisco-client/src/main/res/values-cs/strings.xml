@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Lokace</string>
+  <string name="cant_read_folder">Nelze přečíst adresář</string>
+  <string name="cancel">Storno</string>
+  <string name="no_data">Žádná data</string>
+  <string name="client_certificate_title">Klientský certifikát</string>
+  <string name="vpn_list_title">Profily</string>
+  <string name="file_select">Vyber…</string>
+  <string name="file_nothing_selected">Je třeba vybrat soubor</string>
+  <string name="configure_the_vpn">Konfigurace VPN</string>
+  <string name="menu_add_profile">Přidat profil</string>
+  <string name="clear_log">vymazat log</string>
+  <string name="remove_vpn">Odstranit VPN</string>
+  <string name="remove_vpn_query">Odstranit VPN profil \'%s\'?</string>
+  <string name="clear">Vymazat</string>
+  <string name="send_logfile">Odeslat soubor s logem</string>
+  <string name="send">Odeslat</string>
+  <string name="copied_entry">Záznam z logu zkopírován do schránky</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Prohlížeč souború</string>
+  <string name="inline_file_tab">Vložený soubor</string>
+  <string name="error_importing_file">Chyba při importu souboru</string>
+  <string name="import_error_message">Nemohu importovat soubor ze souborového systému</string>
+  <string name="inline_file_data">[[Vložená data]]</string>
+  <string name="speed_waiting">Čekám na zprávu o stavu…</string>
+  <string name="file_icon">ikona souboru</string>
+  <string name="generalsettings">Nastavení</string>
+  <string name="owner_fix_summary">Pokusit se nastavit vlastníka /dev/tun zařízení. Na některých systémech s CM9 je toto potřeba pro zprovoznění VPNService API. Vyžaduje root zařízení.</string>
+  <string name="owner_fix">Opravit vlastnictví /dev/tun</string>
+  <string name="edit_profile_title">Úprava \"%s\"</string>
+  <string name="netchange_summary">Zapnutím této volby bude vynuceno opětovné připojení, pokud se změní stav sítě (např. z WiFi na mobilní síť a zpět)</string>
+  <string name="netchange">Opětovně připojit při změně sítě</string>
+  <string name="netstatus">Stav sítě:</string>
+  <string name="select_file">Vyber</string>
+  <string name="advanced">Pokročilé</string>
+  <string name="setting_loadtun_summary">pokus se nahrát jaderný modul tun.ko před pokusem o připojení. Vyžaduje rootnuté zařízení.</string>
+  <string name="setting_loadtun">Nahrát tun modul</string>
+  <string name="getproxy_error">Chyba při zjišťování nastavení proxy: %s</string>
+  <string name="no_vpn_profiles_defined">není definován VPN profil.</string>
+  <string name="add_new_vpn_hint">Použij ikonu &lt;img src=\"ic_menu_add\"/&gt; k přidání nové VPN</string>
+  <string name="send_minidump">Poslat Minidump vývojáři</string>
+  <string name="send_minidump_summary">Poslat ladící informace o poslední havárii vývojáři</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Přepnout časové značky</string>
+  <string name="make_selection_inline">Zkopírovat do profilu</string>
+  <string name="add">Přidat</string>
+  <string name="prompt">%1$s se pokouší o kontrolu %2$s</string>
+  <string name="remote_warning">Pokračováním dáváš aplikaci oprávnění pro kompletní kontrolu OpenConnect a k zachytávání veškerého síťového provozu. <b>Nepotvrzuj, pokud nevěříš aplikaci.</b> V opačném případě riskuješ napadení nebezpečným softwarem.</string>
+  <string name="remote_trust">Věřím této aplikaci.</string>
+  <string name="no_external_app_allowed">Žádné aplikaci není povoleno použít externí API</string>
+  <string name="allowed_apps">Povolené aplikace: %s</string>
+  <string name="clearappsdialog">Vyčistit seznam povolených aplikací?\nSoučasný seznam povolených aplikací:\n\n%s</string>
+  <string name="screenoff_title">Pozastavit VPN připojení při vypnutí obrazovky</string>
+  <string name="save_password">Uložit heslo</string>
+  <!--OpenConnect preference strings-->
+</resources>

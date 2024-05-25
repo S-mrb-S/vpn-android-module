@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "vpn-module"
+include(":core", "application")
+includeBuild("../ics-openconnect") {
+    name = ":cisco-client"
+    dependencySubstitution {
+        substitute module("sp.cisco:openconnect-core") using project(":cisco-client")
+    }
+}

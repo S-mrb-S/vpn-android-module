@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">場所</string>
+  <string name="cant_read_folder">ディレクトリが読み取れません</string>
+  <string name="cancel">キャンセル</string>
+  <string name="no_data">データなし</string>
+  <string name="client_certificate_title">クライアント証明書</string>
+  <string name="vpn_list_title">プロファイル</string>
+  <string name="file_select">選択</string>
+  <string name="file_nothing_selected">ファイルを選択する必要があります。</string>
+  <string name="configure_the_vpn">VPNの設定</string>
+  <string name="menu_add_profile">プロファイルの追加</string>
+  <string name="clear_log">ログをクリア</string>
+  <string name="remove_vpn">VPN を削除</string>
+  <string name="remove_vpn_query">VPN プロファイル %s を削除しますか？</string>
+  <string name="clear">クリア</string>
+  <string name="send_logfile">ログ ファイルを送信します。</string>
+  <string name="send">送信</string>
+  <string name="copied_entry">クリップ ボードにコピーされたログ エントリ</string>
+  <string name="faq">よくある質問</string>
+  <string name="file_explorer_tab">ファイルを選択</string>
+  <string name="inline_file_tab">インライン ファイル</string>
+  <string name="error_importing_file">ファイルのインポート エラー</string>
+  <string name="import_error_message">ファイルシステムからファイルをインポートできませんでした。</string>
+  <string name="inline_file_data">[インライン ファイル データ]</string>
+  <string name="speed_waiting">状態メッセージを待っています。</string>
+  <string name="file_icon">ファイルのアイコン</string>
+  <string name="generalsettings">設定</string>
+  <string name="owner_fix_summary">システムに/dev/tunの所有者を設定します。いくつかのCM9のイメージでVPNService APIを動作させるために必要です。root権限が必要です。</string>
+  <string name="owner_fix">/dev/tun の所有権を修正</string>
+  <string name="edit_profile_title">\"%S\"の編集</string>
+  <string name="netchange_summary">この設定を有効にすると、ネットワークの状態変化時(WiFi／モバイル)に再接続を行います。</string>
+  <string name="netchange">ネットワーク変化時に再接続</string>
+  <string name="netstatus">ネットワーク状態：</string>
+  <string name="select_file">選択</string>
+  <string name="advanced">高度</string>
+  <string name="setting_loadtun_summary">接続の試行前にTUNデバイスモジュール(tun.ko)を読み込みます。デバイスのroot化が必要です。</string>
+  <string name="setting_loadtun">TUNモジュールをロード</string>
+  <string name="getproxy_error">プロキシ設定でエラー： %s</string>
+  <string name="no_vpn_profiles_defined">VPNのプロファイルが定義されていません</string>
+  <string name="add_new_vpn_hint">新しいVPNを追加するには &lt;img src=\"ic_menu_add\"/&gt; のアイコンを使用します</string>
+  <string name="send_minidump">ミニダンプを開発者に送信</string>
+  <string name="send_minidump_summary">最後にクラッシュした時のデバッグ情報を作者に送信します。</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">時刻表示の切り替え</string>
+  <string name="make_selection_inline">プロファイルにコピー</string>
+  <string name="add">追加</string>
+  <string name="prompt">%1$s は %2$s を制御しようとしています。</string>
+  <string name="remote_warning">このまま進むと、あなたはOpenConnect for Androidの完全な制御とすべての通信を傍受する権限をアプリケーションに対し与えることになります。<b>アプリケーションが信頼できない限り、承諾しないでください。</b>さもないと、あなたのデータがマルウェアにより漏洩させられる危険があります。</string>
+  <string name="remote_trust">私はこのアプリケーションを信頼します</string>
+  <string name="no_external_app_allowed">外部APIの使用を許可されたアプリはありません</string>
+  <string name="allowed_apps">許可アプリ: %s</string>
+  <string name="clearappsdialog">許可アプリの一覧をクリアしますか?\n現在の許可アプリ一覧:\n\n%s</string>
+  <string name="screenoff_title">画面オフ後にVPN接続を中断する</string>
+  <string name="save_password">パスワードを保存</string>
+  <!--OpenConnect preference strings-->
+</resources>

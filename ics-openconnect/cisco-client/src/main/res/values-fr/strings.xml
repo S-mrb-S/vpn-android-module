@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Emplacement</string>
+  <string name="cant_read_folder">Le dossier ne peut être lu !</string>
+  <string name="cancel">Annuler</string>
+  <string name="no_data">Aucune donnée</string>
+  <string name="client_certificate_title">Certificat client</string>
+  <string name="vpn_list_title">Profils</string>
+  <string name="file_select">Sélectionner…</string>
+  <string name="file_nothing_selected">Vous devez sélectionner un fichier</string>
+  <string name="configure_the_vpn">Configurer le VPN</string>
+  <string name="menu_add_profile">Ajouter un profil</string>
+  <string name="clear_log">Effacer les logs</string>
+  <string name="remove_vpn">Retirer le VPN</string>
+  <string name="remove_vpn_query">\"Effacer le profil VPN %s ?\"?</string>
+  <string name="clear">Effacer</string>
+  <string name="send_logfile">Envoyer le fichier de log</string>
+  <string name="send">Envoyer</string>
+  <string name="copied_entry">Entrée du log copiée</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Explorateur de fichiers</string>
+  <string name="inline_file_tab">Fichier personnalisé</string>
+  <string name="error_importing_file">Impossible d\'importer le fichier</string>
+  <string name="import_error_message">Impossible d\'importer le fichier depuis le système de fichiers</string>
+  <string name="inline_file_data">[[Fichier de données personnalisé]]</string>
+  <string name="speed_waiting">Attente du status…</string>
+  <string name="file_icon">icône du fichier</string>
+  <string name="generalsettings">Paramètres</string>
+  <string name="owner_fix_summary">Tente de définir le propriétaire de /dev/tun. Certaines ROMs CM9 en ont besoin pour faire fonctionner l\'API VPNService. Nécessite les droits root.</string>
+  <string name="owner_fix">Corriger le propriétaire de /dev/tun</string>
+  <string name="edit_profile_title">Modification \"%s\"</string>
+  <string name="netchange_summary">L\'activation de cette option forcera l\'appareil à se reconnecter si l\'état du réseau change (ex.: WIFI/Mobile)</string>
+  <string name="netchange">Reconnexion lors de changement du réseau</string>
+  <string name="netstatus">État du réseau:</string>
+  <string name="select_file">Sélectionner</string>
+  <string name="advanced">Avancé</string>
+  <string name="setting_loadtun_summary">Essayez de charger le module du noyau \"tun.ko\" avant d\'essayer de vous connecter. Requiert des droits root.</string>
+  <string name="setting_loadtun">Charger le module TUN</string>
+  <string name="getproxy_error">Erreur d\'obtention des paramètres de proxy: %s</string>
+  <string name="no_vpn_profiles_defined">Pas de profils VPN définis.</string>
+  <string name="add_new_vpn_hint">Utilisez l\'icône &lt;img src=\\"ic_menu_add\\"/ pour ajouter un nouveau VPN</string>
+  <string name="send_minidump">Envoyer le Minidump au développeur</string>
+  <string name="send_minidump_summary">Envoyer les informations de débogage à propos du dernier accident au développeur</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Activer/désactiver les horodateurs</string>
+  <string name="make_selection_inline">Copier dans le profil</string>
+  <string name="add">Ajouter</string>
+  <string name="prompt">%1$s essais de controler %2$s</string>
+  <string name="remote_warning">En continuant vous donnerez la permission a l\'application de contrôler complètement OpenConnect pour Android et d\'intercepter tout le trafic réseau. <b> N\'acceptez que si vous faite confiance à l\'application. </b> Sinon vous vous exposez au risque de voir vos données compromises par une application malicieuse.</string>
+  <string name="remote_trust">Faire confiance à cette application.</string>
+  <string name="no_external_app_allowed">Aucune appli. autorisée pour utiliser l\'API externe</string>
+  <string name="allowed_apps">Applications autorisées: %s</string>
+  <string name="clearappsdialog">Effacer la liste des appli. externes?\nListe des appli. autorisées:\n\n%s</string>
+  <string name="screenoff_title">Mettre la connection VPN en pause à l\'exctinction de l\'écran</string>
+  <string name="save_password">Enregistrer le mot de passe</string>
+  <!--OpenConnect preference strings-->
+</resources>

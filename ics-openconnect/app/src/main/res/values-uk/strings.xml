@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Розташування</string>
+  <string name="cant_read_folder">Не вдалося прочитати каталог</string>
+  <string name="cancel">Скасувати</string>
+  <string name="no_data">Немає даних</string>
+  <string name="client_certificate_title">Сертифікат клієнта</string>
+  <string name="vpn_list_title">Профілі</string>
+  <string name="file_select">Виберіть…</string>
+  <string name="file_nothing_selected">Слід вибрати файл</string>
+  <string name="configure_the_vpn">Налаштувати VPN</string>
+  <string name="menu_add_profile">Додати профіль</string>
+  <string name="clear_log">очистити журнал</string>
+  <string name="remove_vpn">Видалити VPN</string>
+  <string name="remove_vpn_query">Видалити VPN профіль \'%s\'?</string>
+  <string name="clear">Очистити</string>
+  <string name="send_logfile">Надіслати файл журналу</string>
+  <string name="send">Надіслати</string>
+  <string name="copied_entry">Скопійовано запис журналу до буферу обміну</string>
+  <string name="faq">ЧаПи</string>
+  <string name="file_explorer_tab">Провідник файлів</string>
+  <string name="inline_file_tab">Вбудований файл</string>
+  <string name="error_importing_file">Помилка імпорту файлу</string>
+  <string name="import_error_message">Не вдалося імпортувати файл із файлової системи</string>
+  <string name="inline_file_data">[[Вбудований файл даних]]</string>
+  <string name="speed_waiting">Очікування повідомлення стану…</string>
+  <string name="file_icon">Піктограма файлу</string>
+  <string name="generalsettings">Параметри</string>
+  <string name="owner_fix_summary">Спробуйте змінити власника для /dev/tun. Деякі прошивки CM9 вимагають цього для коректної роботи API OpenConnect. Потрібний root.</string>
+  <string name="owner_fix">Виправити власника /dev/tun</string>
+  <string name="edit_profile_title">Редагується \"%s\"</string>
+  <string name="netchange_summary">Вмикання цього параметру примусить перепідключитися, якщо стан мережі змінився (напр. Wi-Fi/мобільний інтернет)</string>
+  <string name="netchange">Перепідключатися при зміні мережі</string>
+  <string name="netstatus">Статус мережі:</string>
+  <string name="select_file">Вибрати</string>
+  <string name="advanced">Додатково</string>
+  <string name="setting_loadtun_summary">Спробуйте завантажити модуль ядра tun.ko перш ніж з\'єднатися. Необхідний пристрій з правами root.</string>
+  <string name="setting_loadtun">Завантажити tun-модуль</string>
+  <string name="getproxy_error">Помилка отримання параметрів проксі: %s</string>
+  <string name="no_vpn_profiles_defined">VPN профіль не визначено.</string>
+  <string name="add_new_vpn_hint">Використовуйте &lt;img src=\"ic_menu_add\"/&gt; піктограму для додання нової VPN</string>
+  <string name="send_minidump">Надіслати мінідамп розробнику</string>
+  <string name="send_minidump_summary">Відправляє налагоджувальну інформацію розробнику про останнє аварійне завершення</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Переключити часові позначки</string>
+  <string name="make_selection_inline">Скопіювати в профіль</string>
+  <string name="add">Додати</string>
+  <string name="prompt">%1$s спроб контролювати %2$s</string>
+  <string name="remote_warning">Продовжуючи, ви даєте дозвіл на застосування повного контролю OpenConnect для Android і щоб перехоплювати всі мережевого трафіку. <b>Не приймайте, тільки якщо ви не довіряєте програмі.</b> В іншому випадку ви ризикуєте мати скомпрометовані шкідливим програмним забезпеченням дані.\"</string>
+  <string name="remote_trust">Я довіряю цьому додатку.</string>
+  <string name="no_external_app_allowed">Не дозволяється використовувати зовнішнє API</string>
+  <string name="allowed_apps">Дозволенi додатки: %s</string>
+  <string name="clearappsdialog">Очистити список дозволених зовнішніх програм \nПоточний список дозволених програм:\n\n%s</string>
+  <string name="screenoff_title">Пауза VPN з\'єднання після вимкнення екрану</string>
+  <string name="save_password">Зберегти пароль</string>
+  <!--OpenConnect preference strings-->
+</resources>

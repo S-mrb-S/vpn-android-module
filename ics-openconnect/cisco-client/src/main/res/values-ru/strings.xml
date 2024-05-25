@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Расположение</string>
+  <string name="cant_read_folder">Не могу прочитать директорию</string>
+  <string name="cancel">Отмена</string>
+  <string name="no_data">Нет данных</string>
+  <string name="client_certificate_title">Сертификат клиента</string>
+  <string name="vpn_list_title">Профили</string>
+  <string name="file_select">Выбрать…</string>
+  <string name="file_nothing_selected">Вы должны выбрать файл</string>
+  <string name="configure_the_vpn">Настройка VPN-туннеля</string>
+  <string name="menu_add_profile">Добавить конфигурацию</string>
+  <string name="clear_log">очистить журнал</string>
+  <string name="remove_vpn">Удалить VPN</string>
+  <string name="remove_vpn_query">Удаление профиля VPN %s?</string>
+  <string name="clear">Очистить</string>
+  <string name="send_logfile">Отправить файл журнала</string>
+  <string name="send">Отправить</string>
+  <string name="copied_entry">Скопировать лог в буфер обмена</string>
+  <string name="faq">Вопросы и ответы</string>
+  <string name="file_explorer_tab">Обзор файлов</string>
+  <string name="inline_file_tab">Встроенный файл</string>
+  <string name="error_importing_file">Ошибка при импорте файла</string>
+  <string name="import_error_message">Не удалось импортировать файл из файловой системы</string>
+  <string name="inline_file_data">[[Встроенный файл данных]]</string>
+  <string name="speed_waiting">Ожидание сообщения о состоянии…</string>
+  <string name="file_icon">файл значка</string>
+  <string name="generalsettings">Настройки</string>
+  <string name="owner_fix_summary">Попытаться изменить владельца для /dev/tun. Некоторые прошивки CM9 требуют этого для корректной работы API OpenConnect. Требуется root.</string>
+  <string name="owner_fix">Исправить права для /dev/tun</string>
+  <string name="edit_profile_title">Правка \"%s\"</string>
+  <string name="netchange_summary">Включение этого параметра заставит переподключиться, если состояние сети изменения (WIFI с мобильного)</string>
+  <string name="netchange">Переподключение при изменении сети</string>
+  <string name="netstatus">Статус сети:</string>
+  <string name="select_file">Выбрать</string>
+  <string name="advanced">Расширенные</string>
+  <string name="setting_loadtun_summary">Попробуйте загрузить модуль ядра tun.ko прежде чем пытаться подключиться. Требуется root-доступ на устройстве.</string>
+  <string name="setting_loadtun">Загрузить tun-модуль</string>
+  <string name="getproxy_error">Ошибка при получении параметров прокси-сервера: %s</string>
+  <string name="no_vpn_profiles_defined">Профили VPN не указаны.</string>
+  <string name="add_new_vpn_hint">Используйте &lt;img src=\"ic_menu_add\"/&gt; иконку для добавления нового VPN</string>
+  <string name="send_minidump">Отправить Minidump разработчику</string>
+  <string name="send_minidump_summary">Отправка отладочной информации разработчику о последнем аварийном завершении</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Переключение отметок времени</string>
+  <string name="make_selection_inline">Скопировать в профиль</string>
+  <string name="add">Добавить</string>
+  <string name="prompt">%1$s пытается управлять %2$s</string>
+  <string name="remote_warning">Продолжая, вы даете приложению права на управление \"OpenConnect для Android\" и перехват всего сетевого трафика. <b> Не продолжайте, если не доверяете полностью этому приложению. </b> В противном случае вы рискуете утечкой  и использованием ваших данных злоумышленниками.</string>
+  <string name="remote_trust">Я доверяю этому приложению.</string>
+  <string name="no_external_app_allowed">Нет приложений, авторизованных для внешнего API</string>
+  <string name="allowed_apps">Авторизованные приложения: %s</string>
+  <string name="clearappsdialog">Очистить список авторизованных внешних приложений?\nСписок разрешенных приложений:\n\n%s</string>
+  <string name="screenoff_title">Приостановить VPN-соединение при выключенном экране</string>
+  <string name="save_password">Сохранить пароль</string>
+  <string name="cannotparsecert">Не удается отобразить сведения о сертификате</string>
+  <!--OpenConnect preference strings-->
+</resources>

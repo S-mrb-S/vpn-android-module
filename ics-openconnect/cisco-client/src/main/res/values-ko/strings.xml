@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">위치</string>
+  <string name="cant_read_folder">폴더를 읽을 수 없습니다</string>
+  <string name="cancel">취소</string>
+  <string name="no_data">데이터 없음</string>
+  <string name="client_certificate_title">클라이언트 인증서</string>
+  <string name="vpn_list_title">프로파일</string>
+  <string name="file_select">선택…</string>
+  <string name="file_nothing_selected">파일을 선택 해야 합니다</string>
+  <string name="configure_the_vpn">VPN 설정</string>
+  <string name="menu_add_profile">프로파일 추가</string>
+  <string name="clear_log">로그 지우기</string>
+  <string name="remove_vpn">VPN 제거</string>
+  <string name="remove_vpn_query">VPN 프로 파일 \'%s\' 제거?</string>
+  <string name="clear">지우기</string>
+  <string name="send_logfile">로그 파일 보내기</string>
+  <string name="send">보내기</string>
+  <string name="copied_entry">클립보드로 로그 복사</string>
+  <string name="faq">자주 묻는 질문</string>
+  <string name="file_explorer_tab">파일 탐색기</string>
+  <string name="inline_file_tab">인라인 파일</string>
+  <string name="error_importing_file">파일 가져오기 오류</string>
+  <string name="import_error_message">파일 시스템에서 파일을 가져올 수 없습니다.</string>
+  <string name="inline_file_data">[[인라인 파일 데이터]]</string>
+  <string name="speed_waiting">상태 메시지를 기다리는 중…</string>
+  <string name="file_icon">파일 아이콘</string>
+  <string name="generalsettings">설정</string>
+  <string name="owner_fix_summary">/dev/tun의 소유권을 시스템으로 설정 하려고 합니다. 일부 CM9 이미지에서 VPNService API를 사용하기 위해서는 앞의 작업이 요구됩니다. root권한을 가져야합니다.</string>
+  <string name="owner_fix">/dev/tun 소유권 문제 해결</string>
+  <string name="edit_profile_title">수정 \"%s\"</string>
+  <string name="netchange_summary">이 기능을 사용하면 네트워크 상태 변환시 강제로 재접속을 합니다 (예. WIFI 로/에서 모바일)</string>
+  <string name="netchange">네트워크 변화시 재접속</string>
+  <string name="netstatus">네트워크 상태:</string>
+  <string name="select_file">선택</string>
+  <string name="advanced">고급</string>
+  <string name="setting_loadtun_summary">연결을 시도 하기 전에 tun.ko 커널 모듈을 로드하세요. 루팅된 장치야만 합니다.</string>
+  <string name="setting_loadtun">tun 모듈 로드하기</string>
+  <string name="getproxy_error">프록시 설정 가져오기 오류: %s</string>
+  <string name="no_vpn_profiles_defined">VPN 프로파일이 정의 않됐습니다.</string>
+  <string name="add_new_vpn_hint">이 &lt;img src=\"ic_menu_add\"/&gt; 아이콘을 사용하여 VPN을 추가 하세요</string>
+  <string name="send_minidump">미니 덤프를 개발자에게 보내기</string>
+  <string name="send_minidump_summary">개발자에게 마지막 비정상종료에 대한 디버깅 정보를 보냅니다</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">타임 스탬프 사용 미사용</string>
+  <string name="make_selection_inline">프로파일에 복사</string>
+  <string name="add">추가</string>
+  <string name="prompt">%1$s 이(가) %2$s 을(를) 제어하려고 시도</string>
+  <string name="remote_warning">다음 진행으로, 당신은 응용프로그램에게 안드로이드에 대한 OpenConnect의 완벽한 제어권과 모든 네트워크 트래픽을 가로챌 수 있는 권한을 허락합니다. <b>앱을 신뢰하지 않는다면 허락하지 마십시오.</b> 그렇지 않으면, 당신은 당신의 데이터를 악성 소프트웨어에게 빼앗길 수 있습니다.\"</string>
+  <string name="remote_trust">나는 이 프로그램을 신뢰합니다.</string>
+  <string name="no_external_app_allowed">어떤 응용 프로그램도 외부 API를 사용할 수 없습니다</string>
+  <string name="allowed_apps">허용된 앱: %s</string>
+  <string name="clearappsdialog">허용된 외부 앱의 목록을 삭제하겠습니까?\n현재 허용된 외부 앱:\n\n%s</string>
+  <string name="screenoff_title">화면 꺼짐 후 VPN 연결 일시 정지</string>
+  <string name="save_password">암호 저장</string>
+  <!--OpenConnect preference strings-->
+</resources>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Locatie</string>
+  <string name="cant_read_folder">Map is onleesbaar</string>
+  <string name="cancel">Annuleer</string>
+  <string name="no_data">Geen Gegevens</string>
+  <string name="client_certificate_title">Client Certificaat</string>
+  <string name="vpn_list_title">Profielen</string>
+  <string name="file_select">Selecteer…</string>
+  <string name="file_nothing_selected">Je moet een bestand selecteren</string>
+  <string name="configure_the_vpn">VPN configureren</string>
+  <string name="menu_add_profile">Profiel toevoegen</string>
+  <string name="clear_log">logboek wissen</string>
+  <string name="remove_vpn">VPN wissen</string>
+  <string name="remove_vpn_query">De VPN-profiel \'%s\' verwijderen?</string>
+  <string name="clear">Leeg maken</string>
+  <string name="send_logfile">Logboek verzenden</string>
+  <string name="send">Verzenden</string>
+  <string name="faq">Veelgestelde vragen </string>
+  <string name="speed_waiting">Wachten op status bericht…</string>
+  <string name="file_icon">bestands pictogram</string>
+  <!--OpenConnect preference strings-->
+</resources>

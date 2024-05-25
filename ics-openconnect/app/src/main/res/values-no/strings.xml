@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Plassering</string>
+  <string name="cancel">Avbryt</string>
+  <string name="no_data">Ingen Data</string>
+  <string name="client_certificate_title">Klient sertifikat</string>
+  <string name="file_select">Velg…</string>
+  <string name="configure_the_vpn">Konfigurer VPN</string>
+  <string name="menu_add_profile">Legge til profil</string>
+  <string name="clear_log">Tøm logg</string>
+  <string name="remove_vpn">Fjern VPN</string>
+  <string name="clear">Fjern</string>
+  <string name="send_logfile">Send loggfilen</string>
+  <string name="send">Send</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Filutforsker</string>
+  <string name="error_importing_file">Feil ved import av fil</string>
+  <string name="import_error_message">Kunne ikke importere filen fra filsystemet</string>
+  <string name="speed_waiting">Venter på tilstands melding…</string>
+  <string name="file_icon">fil ikon</string>
+  <string name="owner_fix">Fiks eierskap av /dev/tun</string>
+  <string name="edit_profile_title">Rediger \"%s\"</string>
+  <string name="netchange">Koble til på nytt ved nettverks endring</string>
+  <string name="netstatus">Nettverksstatus:</string>
+  <string name="select_file">Velg</string>
+  <string name="advanced">Avansert</string>
+  <string name="setting_loadtun_summary">Prøv å laste tun.ko kjernemodul før tilkobling. Krever at enheten er rootet.</string>
+  <string name="setting_loadtun">Last tun modul</string>
+  <string name="getproxy_error">Feil ved henting av proxy-innstillinger: %s</string>
+  <string name="no_vpn_profiles_defined">Ingen VPN-profiler er definert.</string>
+  <!--OpenConnect preference strings-->
+</resources>

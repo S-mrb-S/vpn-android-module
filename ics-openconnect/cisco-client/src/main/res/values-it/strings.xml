@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Posizione</string>
+  <string name="cant_read_folder">Impossibile leggere la directory</string>
+  <string name="cancel">Annulla</string>
+  <string name="no_data">Nessun dato</string>
+  <string name="client_certificate_title">Certificato client</string>
+  <string name="vpn_list_title">Profili</string>
+  <string name="file_select">Seleziona…</string>
+  <string name="file_nothing_selected">Devi selezionare un file</string>
+  <string name="configure_the_vpn">Configura la VPN</string>
+  <string name="menu_add_profile">Aggiungi profilo</string>
+  <string name="clear_log">Cancella registro</string>
+  <string name="remove_vpn">Rimuovi VPN</string>
+  <string name="remove_vpn_query">Rimuovere il profilo VPN \'%s\'?</string>
+  <string name="clear">Azzera</string>
+  <string name="send_logfile">Invia il file di log</string>
+  <string name="send">Invia</string>
+  <string name="copied_entry">Voce di registro copiata negli appunti</string>
+  <string name="faq">Domande frequenti (FAQ)</string>
+  <string name="file_explorer_tab">Esplora risorse</string>
+  <string name="inline_file_tab">Blocco note</string>
+  <string name="error_importing_file">Errore durante l\'importazione del file</string>
+  <string name="import_error_message">Impossibile importare il file dal filesystem</string>
+  <string name="inline_file_data">[[dati del blocco note]]</string>
+  <string name="speed_waiting">In attesa del messaggio di stato…</string>
+  <string name="file_icon">icona del file</string>
+  <string name="generalsettings">Impostazioni</string>
+  <string name="owner_fix_summary">Tenta di impostare system come proprietario di /dev/tun. Alcuni firmware CM9 necessitano di questa impostazione affinché le API del servizio VPN funzionino. E\' necessario essere root.</string>
+  <string name="owner_fix">Correggi i diritti su /dev/tun</string>
+  <string name="edit_profile_title">Modifica \"%s\"</string>
+  <string name="netchange_summary">Selezionando questa opzione verrà forzata una riconnessione se lo stato della rete cambia (da WIFI a cellulare e viceversa)</string>
+  <string name="netchange">Riconnetti in caso cambi la rete</string>
+  <string name="netstatus">Stato della rete:</string>
+  <string name="select_file">Selezionare</string>
+  <string name="advanced">Avanzate</string>
+  <string name="setting_loadtun_summary">Prova a caricare il modulo tun.ko prima di connettersi. Si devono avere diritti di root sul dispositivo.</string>
+  <string name="setting_loadtun">Carica il modulo tun</string>
+  <string name="getproxy_error">Errore nell\'ottenere le impostazioni del proxy: %s</string>
+  <string name="no_vpn_profiles_defined">Nessun profilo VPN definito.</string>
+  <string name="add_new_vpn_hint">Usa l\'icona &lt;img src=\"ic_menu_add\"/&gt; per aggiungere una nuova VPN</string>
+  <string name="send_minidump">Invia Minidump allo sviluppatore</string>
+  <string name="send_minidump_summary">Invia informazioni di debug riguardanti l\'ultimo crash allo sviluppatore</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Mostra/Nascondi ora</string>
+  <string name="make_selection_inline">Copia nel profilo</string>
+  <string name="add">Aggiungi</string>
+  <string name="prompt">%1$s tenta di controllare %2$s</string>
+  <string name="remote_warning">Se procedi, concedi all\'applicazione l\'autorizzazione per intercettare tutto il traffico di rete.<b> NON accettare se non consideri l\'applicazione attendibile</b>, altrimenti corri il rischio che i tuoi dati vengano compromessi da programmi software dannosi.</string>
+  <string name="remote_trust">Considero questa applicazione attendibile.</string>
+  <string name="no_external_app_allowed">Nessuna app ha il permesso di usare l\'API esterna</string>
+  <string name="allowed_apps">Apps abilitate;%s</string>
+  <string name="clearappsdialog">Cancellare la lista delle apps esterne autorizzate?\nLista corrente di applicazioni autorizzate:\n\n%s</string>
+  <!--OpenConnect preference strings-->
+</resources>

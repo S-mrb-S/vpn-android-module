@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Copy the <permission> block to your app when using the REMOTE API. Otherwise OpenConnect
+        needs to be installed first -->
+<!--    <permission-->
+<!--        android:name="app.openconnect.REMOTE_API"-->
+<!--        android:description="@string/permission_description"-->
+<!--        android:label="Control OpenConnect"-->
+<!--        android:permissionGroup="android.permission-group.NETWORK"-->
+<!--        android:protectionLevel="dangerous" />-->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app"
+        android:supportsRtl="true"
+        android:name="app.openconnect.Application">
+        <activity
+            android:name=".ConnectionEditorActivity" />
+        <activity
+            android:name=".FragActivity" />
+        <activity
+            android:name=".TokenImportActivity"
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="http"
+                    android:host="127.0.0.1"
+                    android:path="/securid/ctf" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="http"
+                    android:host="rsa.com"
+                    android:path="/android/token/ctf" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="com.rsa.securid" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="com.rsa.securid.iphone" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="file"
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern=".*\\.sdtid" />
+            </intent-filter>
+
+            </activity>
+        <activity android:name=".FileSelect" />
+        <activity
+            android:name=".MainActivity"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:theme="@android:style/Theme.Dialog"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true" />
+
+        <service
+            android:name="app.openconnect.core.OpenVpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
+<!--
+        <service
+            android:name=".api.ExternalOpenVPNService"
+            android:permission="app.openconnect.REMOTE_API" >
+            <intent-filter>
+                <action android:name="app.openconnect.api.IOpenVPNAPIService" />
+            </intent-filter>
+        </service>
+-->
+
+        <activity
+            android:permission="app.openconnect.REMOTE_API"
+            android:name=".api.GrantPermissionsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:permission="app.openconnect.REMOTE_API"
+            android:name=".api.ConfirmDialog"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".OnBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name=".FileProvider"
+            android:authorities="app.openconnect.FileProvider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <!--
+        <receiver android:name="core.GetRestrictionReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_RESTRICTION_ENTRIES" />
+            </intent-filter>
+        </receiver>
+        -->
+
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Bypass Android VPN confirmation dialog" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="30" />
+
+    </application>
+
+</manifest>

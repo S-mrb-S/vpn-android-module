@@ -1,0 +1,7 @@
+include ':app', ':cisco-client'
+includeBuild("../openvpn-client") {
+    name = ":openvpn"
+    dependencySubstitution {
+        substitute module("sp.openvpn:core") using project(":openvpn")
+    }
+}

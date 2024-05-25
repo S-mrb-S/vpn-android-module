@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Lokalizacja</string>
+  <string name="cant_read_folder">Nie można odczytać katalogu</string>
+  <string name="cancel">Anuluj</string>
+  <string name="no_data">Brak danych</string>
+  <string name="client_certificate_title">Certyfikat klienta</string>
+  <string name="vpn_list_title">Profile</string>
+  <string name="file_select">Wybierz...</string>
+  <string name="file_nothing_selected">Wybierz plik</string>
+  <string name="configure_the_vpn">Konfiguracja VPN</string>
+  <string name="menu_add_profile">Dodaj profil</string>
+  <string name="clear_log">Wyczyść log</string>
+  <string name="remove_vpn">Usuń VPN</string>
+  <string name="remove_vpn_query">Usunąć profil VPN \'%s\'?</string>
+  <string name="clear">Czyść</string>
+  <string name="send_logfile">Wyślij loga</string>
+  <string name="send">Wyślij</string>
+  <string name="copied_entry">Skopiowano log do schowka</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Manager plików</string>
+  <string name="error_importing_file">Błąd importu pliku</string>
+  <string name="import_error_message">Nie można zaimportować pliku z systemu</string>
+  <string name="file_icon">plik ikony</string>
+  <string name="generalsettings">Ustawienia</string>
+  <string name="edit_profile_title">Edycja \"%s\"</string>
+  <string name="netchange_summary">Włączenie tej opcji spowoduje ponowne połączenie jeśli stan sieci się zmienił (np. z WiFi na GSM)</string>
+  <string name="netchange">Połącz ponownie przy zmianie sieci</string>
+  <string name="netstatus">Status sieci:</string>
+  <string name="select_file">Wybierz</string>
+  <string name="advanced">Zaawansowane</string>
+  <string name="setting_loadtun_summary">Próba załadowania modułu tun.ko kernel przez próbą połączenia. Potrzeba rootowanych urządzeń.</string>
+  <string name="setting_loadtun">Załaduj moduł tun</string>
+  <string name="getproxy_error">Błąd ustawień proxy: %s</string>
+  <string name="no_vpn_profiles_defined">Nie zdefiniowano żadnego profilu.</string>
+  <string name="send_minidump">Wyślij minidump do autora</string>
+  <string name="send_minidump_summary">Wysyłam informacje debuggera o ostatniej awarii aplikacji do twórcy</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="make_selection_inline">Skopiuj do profilu</string>
+  <string name="add">Dodaj</string>
+  <string name="prompt">%1$s próby kontroli %2$s</string>
+  <string name="remote_warning">Akceptując, dajesz aplikacji uprawnienia do pełnego kontrolowania przez OpenConnect całego ruchu sieciowego. <b>Nie akceptuj, jeżeli nie ufasz aplikacji w pełni. </b> W przeciwnym razie istnieje ryzyko przejęcia danych przez złośliwe oprogramowanie. </string>
+  <string name="remote_trust">Ufam tej aplikacji.</string>
+  <string name="no_external_app_allowed">Żadna aplikacja nie ma pozwolenia do używania zewnętrznego API</string>
+  <string name="allowed_apps">Dozwolone aplikacje: %s</string>
+  <string name="clearappsdialog">Wyczyścić listę dozwolonych aplikacji?\nObecna lista dozwolonych aplikacji:\n\n%s</string>
+  <string name="screenoff_title">Wstrzymaj połączenie VPN po wyłączeniu wyświetlacza</string>
+  <string name="save_password">Zapisz hasło</string>
+  <!--OpenConnect preference strings-->
+</resources>

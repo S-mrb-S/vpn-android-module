@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">位置</string>
+  <string name="cant_read_folder">目法讀取檔案目錄</string>
+  <string name="cancel">取消</string>
+  <string name="no_data">沒有資料</string>
+  <string name="client_certificate_title">客戶端證書</string>
+  <string name="file_select">選擇…</string>
+  <string name="file_nothing_selected">你必須選擇一個檔案</string>
+  <string name="configure_the_vpn">設定VPN</string>
+  <string name="menu_add_profile">新增設定檔</string>
+  <string name="clear_log">清除記錄檔</string>
+  <string name="remove_vpn">移除VPN</string>
+  <string name="remove_vpn_query">要移除VPN設定檔 %s 嗎?</string>
+  <string name="clear">清除</string>
+  <string name="send_logfile">分享記錄檔</string>
+  <string name="send">分享</string>
+  <string name="copied_entry">已將記錄複製到剪貼簿</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">檔案瀏覽器</string>
+  <string name="inline_file_tab">內嵌檔案</string>
+  <string name="error_importing_file">匯入過程中發生錯誤</string>
+  <string name="import_error_message">無法從檔案系統中匯入檔案</string>
+  <string name="inline_file_data">&lt;內嵌於設定檔&gt;</string>
+  <string name="speed_waiting">等待狀態訊息…</string>
+  <string name="file_icon">檔案圖標</string>
+  <string name="owner_fix_summary">嘗試修正/dev/tun擁有者權限。已知有些CM9 ROM需要透過這個來才能使得VPN服務API得以運作。本功能需要Root。</string>
+  <string name="owner_fix">修正 /dev/tun 的擁有者</string>
+  <string name="edit_profile_title">正在編輯\"%s\"</string>
+  <string name="netchange_summary">當網絡狀況變更時強制重新連接(例如從WiFi變成手機網絡，反之亦然)</string>
+  <string name="netchange">網絡異動時重新連接</string>
+  <string name="netstatus">網絡狀態:</string>
+  <string name="select_file">選擇</string>
+  <string name="advanced">進階</string>
+  <string name="setting_loadtun_summary">在連線前嘗試載入Tun模組，需要Root。</string>
+  <string name="setting_loadtun">載入Tun模組</string>
+  <string name="getproxy_error">取得代理伺服器資訊時發生錯誤: %s</string>
+  <string name="send_minidump">向開發人員傳送Minidump</string>
+  <!--OpenConnect preference strings-->
+</resources>

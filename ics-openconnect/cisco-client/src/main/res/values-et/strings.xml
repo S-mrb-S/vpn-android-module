@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Asukoht</string>
+  <string name="cant_read_folder">Kataloog pole loetav</string>
+  <string name="cancel">Tühista</string>
+  <string name="no_data">Andmed puuduvad</string>
+  <string name="client_certificate_title">Kliendisertifikaat</string>
+  <string name="vpn_list_title">Profiilid</string>
+  <string name="file_select">Vali…</string>
+  <string name="file_nothing_selected">Valige fail</string>
+  <string name="configure_the_vpn">Konfigureeri VPN</string>
+  <string name="menu_add_profile">Lisa profiil</string>
+  <string name="clear_log">Tühjenda logi</string>
+  <string name="remove_vpn">Eemalda VPN</string>
+  <string name="remove_vpn_query">Kas eemaldada VPN profiil \'%s\'?</string>
+  <string name="clear">Tühjenda</string>
+  <string name="send_logfile">Saada logifail</string>
+  <string name="send">Saada</string>
+  <string name="copied_entry">Logikirje kopeeriti lõikepuhvrisse</string>
+  <string name="faq">KKK</string>
+  <string name="file_explorer_tab">Failihaldur</string>
+  <string name="inline_file_tab">Integreeritud fail</string>
+  <string name="error_importing_file">Viga faili importimisel</string>
+  <string name="import_error_message">Faili importimine failisüsteemist ebaõnnestus</string>
+  <string name="inline_file_data">[[tekstisisene faili info]]</string>
+  <string name="speed_waiting">Ootan olekuteadet…</string>
+  <string name="file_icon">faili ikoon</string>
+  <string name="generalsettings">Seaded</string>
+  <string name="owner_fix_summary">Püütakse seada /dev/tun omanikku system\'iks. VPNService API nõuab seda mõne CM9 versiooni puhul. Seade peab olema ruuditud.</string>
+  <string name="owner_fix">Korrasta /dev/tun omanikuõigused</string>
+  <string name="edit_profile_title">Redigeeritakse \"%s\"</string>
+  <string name="netchange_summary">Selle valiku aktiveerimine kutsub esile VPN uuestiühendumise kui võrgu olek muutub (nt. WIFI peale/pealt mobiilile)</string>
+  <string name="netchange">Uuestiühendus võrgu oleku muutumisel</string>
+  <string name="netstatus">Võrgu olek:</string>
+  <string name="select_file">Vali</string>
+  <string name="advanced">Põhjalikum</string>
+  <string name="setting_loadtun_summary">Proovi enne ühendumist laadida tun.ko tuumamoodul. Nõuab ruuditud seadet.</string>
+  <string name="setting_loadtun">Laadi tun moodul</string>
+  <string name="getproxy_error">Viga proxy seadistuste vastuvõtul: %s</string>
+  <string name="no_vpn_profiles_defined">VPN profiile pole defineeritud.</string>
+  <string name="add_new_vpn_hint">Kasuta uue VPN lisamiseks &lt;img src=\"ic_menu_add\"/&gt; ikooni</string>
+  <string name="send_minidump">Saada arendajale minitõmmis</string>
+  <string name="send_minidump_summary">Saada eelmise kokkujooksmise kohta käiv silumisinfo arendajale</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Vaheta ajatempleid</string>
+  <string name="make_selection_inline">Kopeeri profiili</string>
+  <string name="add">Lisa</string>
+  <string name="prompt">%1$s katset et juhtida %2$s</string>
+  <string name="remote_warning">Jätkates annate sellele programmile täieliku kontrolli üle Androidi OpenConnect-i ja samuti õiguse jälgida kogu võrguliiklust. <b> Kui te ei usalda seda programmi, siis ÄRGE NÕUSTUGE. </b> Vastasel juhul riskite te oma andmete privaatsuse või terviklikkuse manipulatsiooniga pahatahtliku tarkvara poolt.\"</string>
+  <string name="remote_trust">Ma usaldan seda programmi.</string>
+  <string name="no_external_app_allowed">Ühelgi programmil pole luba kasutada välist API-t</string>
+  <string name="allowed_apps">Lubatud programmid: %s</string>
+  <string name="clearappsdialog">Kas tühjenda lubatud väliste programmide nimekiri?\nKehtiv lubatud programmide nimekiri:\n\n%s</string>
+  <string name="screenoff_title">Peata VPN ühendus peale ekraani välja lülitamist</string>
+  <string name="save_password">Salvesta parool</string>
+  <string name="device_specific">Seadmespetsiifilised häkid</string>
+  <string name="cannotparsecert">Sertifikaadiinfo kuvamine ei õnnestu</string>
+  <string name="vpnbehaviour">VPN käitumine</string>
+  <!--OpenConnect preference strings-->
+</resources>

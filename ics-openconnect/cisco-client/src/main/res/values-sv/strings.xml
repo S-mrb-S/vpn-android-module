@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Plats</string>
+  <string name="cant_read_folder">Katalogen kan inte läsas</string>
+  <string name="cancel">Avbryt</string>
+  <string name="no_data">Inga Data</string>
+  <string name="client_certificate_title">Klientcertifikat</string>
+  <string name="vpn_list_title">Profiler</string>
+  <string name="file_select">Välj...</string>
+  <string name="file_nothing_selected">Du måste välja en fil</string>
+  <string name="configure_the_vpn">Konfigurera VPN-anslutningen</string>
+  <string name="menu_add_profile">Lägga till en profil</string>
+  <string name="clear_log">rensa loggen</string>
+  <string name="remove_vpn">Ta bort VPN</string>
+  <string name="remove_vpn_query">Ta bort VPN-profilen \'%s\'?</string>
+  <string name="clear">Klart</string>
+  <string name="send_logfile">Skicka loggfilen</string>
+  <string name="send">Skicka</string>
+  <string name="copied_entry">Kopierade loggpost till klippboken</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">Filutforskare</string>
+  <string name="inline_file_tab">Inline-fil</string>
+  <string name="error_importing_file">Fel vid import av fil</string>
+  <string name="import_error_message">Kunde inte importera filen från filsystemet</string>
+  <string name="inline_file_data">[[Inline-fil data]]</string>
+  <string name="speed_waiting">Väntar på tillstånds meddelande...</string>
+  <string name="file_icon">filikon</string>
+  <string name="generalsettings">Inställningar</string>
+  <string name="owner_fix_summary">Försöker att sätta ägaren av /dev/tun till system. Vissa CM9 ROM behöver detta för att VPNService API ska fungera. Detta kräver root.</string>
+  <string name="owner_fix">Fixa ägande av /dev/tun</string>
+  <string name="edit_profile_title">Redigerar \"%s\"</string>
+  <string name="netchange_summary">Aktivering av detta alternativ kommer att tvinga en återanslutning om nätverksanslutningen ändras (t.ex. WiFi &lt;-&gt; mobildata)</string>
+  <string name="netchange">Återanslut vid förändring av nätverksanslutning</string>
+  <string name="netstatus">Nätverksstatus:</string>
+  <string name="select_file">Välj</string>
+  <string name="advanced">Avancerad</string>
+  <string name="setting_loadtun_summary">Prova att ladda kärnmodulen tun.ko innan du försöker ansluta. Kräver root.</string>
+  <string name="setting_loadtun">Ladda tun modul</string>
+  <string name="getproxy_error">Fel vid hämtning av proxyinställningar: %s</string>
+  <string name="no_vpn_profiles_defined">Inga VPN-profiler har definierats.</string>
+  <string name="add_new_vpn_hint">Använd &lt;img src=\"ic_menu_add\"/&gt; ikonen för att lägga till en ny VPN</string>
+  <string name="send_minidump">Skicka Minidump till utvecklare</string>
+  <string name="send_minidump_summary">Skickar felsökningsinformation om senaste krasch till utvecklare</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Växla tidsstämplar</string>
+  <string name="make_selection_inline">Kopiera till profil</string>
+  <string name="add">Lägg till</string>
+  <string name="prompt">%1$s försöker styra %2$s</string>
+  <string name="remote_warning">Genom att fortsätta ger du applikationen tilstånd att fullständigt styra OpenVPM för Android och att avlyssna all nätverkstrafik. <b>Acceptera INTE om du inte litar på applikationen.</b> Annars riskerar du att din data äventyras av skadlig programvara.\"</string>
+  <string name="remote_trust">Jag litar på denna applikation.</string>
+  <string name="no_external_app_allowed">Ingen app får använda externa API</string>
+  <string name="allowed_apps">Tillåtna apps: %s</string>
+  <string name="clearappsdialog">Rensa lista över tillåtna externa apps? \nNuvarande lista över tillåtna apps:\n\n%s</string>
+  <string name="screenoff_title">Pausa VPN-anslutningen efter att skärmen stängts av</string>
+  <string name="save_password">Spara lösenord</string>
+  <!--OpenConnect preference strings-->
+</resources>

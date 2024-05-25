@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app">OpenConnect</string>
+  <string name="location">Locaţie</string>
+  <string name="cant_read_folder">Directorul nu poate fi citit</string>
+  <string name="cancel">Anulare</string>
+  <string name="no_data">Nu există date</string>
+  <string name="client_certificate_title">Certificat client</string>
+  <string name="vpn_list_title">Profile</string>
+  <string name="file_select">Selectaţi…</string>
+  <string name="file_nothing_selected">Trebuie să selectaţi un fişier</string>
+  <string name="configure_the_vpn">Configurare VPN</string>
+  <string name="menu_add_profile">Adaugă profil</string>
+  <string name="clear_log">Golire jurnal</string>
+  <string name="remove_vpn">Elimina VPN</string>
+  <string name="remove_vpn_query">Şterge profilul VPN \'%s\'?</string>
+  <string name="clear">Goleşte</string>
+  <string name="send_logfile">Trimite fişier jurnal</string>
+  <string name="send">Trimite</string>
+  <string name="copied_entry">Linia din log s-a copiat in clip board</string>
+  <string name="faq">FAQ</string>
+  <string name="file_explorer_tab">File Explorer</string>
+  <string name="inline_file_tab">Fişier inline</string>
+  <string name="error_importing_file">Eroare importare fişier</string>
+  <string name="import_error_message">Nu s-a putut importa fişierul din filesystem</string>
+  <string name="inline_file_data">[[date fişier inline]]</string>
+  <string name="speed_waiting">Se aşteaptă mesajul de stare…</string>
+  <string name="file_icon">icon fişier</string>
+  <string name="generalsettings">Setări</string>
+  <string name="owner_fix_summary">Încearcă să seteze owner-ul /dev/tun ca sistem. Unele imagini CM9 au nevoie de asta pentru a permite API-ului VPNService să funcţioneze. Are nevoie de root.</string>
+  <string name="owner_fix">Repară drepturi /dev/tun</string>
+  <string name="edit_profile_title">Editare \"%s\"</string>
+  <string name="netchange_summary">Activând această opţiune forţaţi o reconectare dacă se schimbă starea de reţea (e.g. WiFi la/de la mobil)</string>
+  <string name="netchange">Reconectare la schimbare reţea</string>
+  <string name="netstatus">Statutus reţea:</string>
+  <string name="select_file">Selectare</string>
+  <string name="advanced">Avansate</string>
+  <string name="setting_loadtun_summary">Încearcă încărcarea modului kernel tun.ko înainte de conectare. Are nevoie de un device root-at.</string>
+  <string name="setting_loadtun">Încarcă modulul tun</string>
+  <string name="getproxy_error">Eroare la obţinerea setărilor proxy: %s</string>
+  <string name="no_vpn_profiles_defined">nici un profil VPN definit.</string>
+  <string name="add_new_vpn_hint">Folosiţi icoana  &lt;img src=\"ic_menu_add\"/&gt; pentru a adăuga un nou VPN</string>
+  <string name="send_minidump">Trimite Minidump la dezvoltator</string>
+  <string name="send_minidump_summary">Trimite informații de depanare despre ultimul crash la dezvoltator</string>
+  <string name="statusline_bytecount">↓%2$s/s %1$s - ↑%4$s/s %3$s</string>
+  <string name="toggle_timestamps">Activează timestamps</string>
+  <string name="make_selection_inline">Copiaţi în profil</string>
+  <string name="add">Adauga</string>
+  <string name="prompt">%1$s încercări de a controla %2$s</string>
+  <string name="remote_warning">Continuând, daţi permisiunea aplicaţiei de a controla complet OpenConnect pentru Android și de a intercepta tot traficul de rețea. <b>Nu acceptaţi decât dacă aveți încredere în aplicație</b> În caz contrar, riscaţi să aveţi datele compromise de software maliţios.\"</string>
+  <string name="remote_trust">Am încredere în această aplicaţie.</string>
+  <string name="no_external_app_allowed">Nici o aplicaţie nu are permisiunea de a folosi API-ul extern</string>
+  <string name="allowed_apps">Aplicaţii permise: %s</string>
+  <string name="clearappsdialog">Şterge lista aplicaţilor permise?\nLista curentă a aplicaţilor ce au permisiune:\n\n%s</string>
+  <string name="screenoff_title">Suspendă conexiunea VPN după închiderea ecranului</string>
+  <string name="save_password">Salvare parola</string>
+  <!--OpenConnect preference strings-->
+</resources>
