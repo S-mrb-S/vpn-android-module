@@ -27,8 +27,8 @@ import java.util.Objects;
  * by MehrabSp
  */
 public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControllerActivity {
-    public OpenVPNThread vpnThread = new OpenVPNThread();
-    private OpenVPNService vpnService = new OpenVPNService();
+    protected OpenVPNThread vpnThread = new OpenVPNThread();
+    protected OpenVPNService vpnService = new OpenVPNService();
     protected String OpenVpnStatus = "";
     protected Boolean isOpenVpnALive = false;
 
@@ -39,6 +39,9 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
         // Checking is vpn already running or not
         isServiceRunning();
         VpnStatus.initLogCache(this.getCacheDir());
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
+                new IntentFilter("connectionState"));
     }
 
     private void sendStatusToCallBack(String str){
@@ -241,15 +244,6 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
 
         prepareVpn(componentActivity, config, password, username);
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
-                new IntentFilter("connectionState"));
-    }
-
     @Override
     public void onPause() {
         super.onPause();

@@ -1,9 +1,11 @@
 package sp.openconnect.remote;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import sp.openconnect.VpnProfile;
@@ -71,6 +73,18 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        CiscoConn = new VPNConnector(this, true) { // run on activity (require)
+            @Override
+            public void onUpdate(OpenVpnService service) {
+                CiscoUpdateUI(service);
+            }
+        };
+    }
+
+    @Override
     public void onStop() {
         CiscoConn.stopActiveDialog();
         CiscoConn.unbind();
@@ -82,13 +96,10 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
     public void onResume() {
         super.onResume();
 
-        CiscoConn = new VPNConnector(this, true) { // run on activity (require)
-            @Override
-            public void onUpdate(OpenVpnService service) {
-                CiscoUpdateUI(service);
-            }
-        };
+        CiscoUpdateCurrentInfo();
+    }
 
+    protected void CiscoUpdateCurrentInfo() {
         Static.isEnableDialog = isEnableDialog();
         Static.CurrentPassWord = CurrentPassWord();
         Static.CurrentUserName = CurrentUserName();

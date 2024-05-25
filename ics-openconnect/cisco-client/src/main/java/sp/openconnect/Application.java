@@ -31,8 +31,6 @@ import sp.openconnect.core.FragCache;
 import sp.openconnect.core.ProfileManager;
 
 public abstract class Application extends de.blinkt.openvpn.core.App {
-	protected boolean showUnSupportToast = true;
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -47,17 +45,16 @@ public abstract class Application extends de.blinkt.openvpn.core.App {
 	}
 
 	private void checkProcessorModel() {
-		if(showUnSupportToast){
 			String processorModel = Build.CPU_ABI;
-
 			if (processorModel.equals("x86") || processorModel.equals("x86_64")) {
-				Toast.makeText(this, "هشدار! این مدل از پردازنده برای اتصال به سیسکو پشتیبانی نمیشود.",
-						Toast.LENGTH_LONG).show();
+				if(isShowToastOpenVpn){
+					Toast.makeText(this, "هشدار! این مدل از پردازنده برای اتصال به سیسکو پشتیبانی نمیشود.",
+							Toast.LENGTH_LONG).show();
+				}
 			}else{
 				System.loadLibrary("openconnect");
 				System.loadLibrary("stoken");
 			}
-		}
 	}
 
 }
