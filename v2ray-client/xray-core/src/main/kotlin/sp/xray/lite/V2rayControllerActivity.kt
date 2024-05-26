@@ -44,6 +44,9 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.TimeUnit
 
+/**
+ * by MRB
+ */
 abstract class V2rayControllerActivity : BaseActivity() {
 
     private val mainStorage by lazy {
@@ -65,7 +68,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
                 if (requestCode == 5) {
                     getResultOpenVpn()
                 } else {
-                    startV2Ray()
+                    V2RayStart()
                 }
             }
         }
@@ -73,7 +76,6 @@ abstract class V2rayControllerActivity : BaseActivity() {
     // for OpenVpn
     protected fun sendRequestOpenVpnPermission() {
         val intent = VpnService.prepare(this)
-
         if (intent == null) {
             getResultOpenVpn()
         } else {
@@ -84,36 +86,36 @@ abstract class V2rayControllerActivity : BaseActivity() {
 
     protected abstract fun getResultOpenVpn()
 
-    // ..
+    // v2ray options setting
     protected var V2rayShowSpeedNotif: Boolean = true
     protected var V2rayDirectURLORIP: String = ""
-    val mainViewModel: MainViewModel by viewModels()
 
-    protected fun fabClick() {
-        if (mainViewModel.isRunning.value == true) {
-            Utils.stopVService(this)
-        } else if ((settingsStorage?.decodeString(AppConfig.PREF_MODE) ?: "VPN") == "VPN") {
-            val intent = VpnService.prepare(this)
-            if (intent == null) {
-                startV2Ray()
+    private val mainViewModel: MainViewModel by viewModels()
+
+    protected fun V2rayFabClick(config: String) {
+        delAndAddV2rayConfig(config)
+        if(!V2rayStop()){
+            if ((settingsStorage?.decodeString(AppConfig.PREF_MODE) ?: "VPN") == "VPN") {
+                val intent = VpnService.prepare(this)
+                if (intent == null) {
+                    V2RayStart()
+                } else {
+                    requestVpnPermission.launch(intent)
+                }
             } else {
-                requestVpnPermission.launch(intent)
+                V2RayStart()
             }
-        } else {
-            startV2Ray()
         }
     }
 
     /**
      * send VpnService permissions, return false means permissions denied
+     *میتوانید قبل از وصل شدن به هر اتصالی اول مجوز بگیرید.
+     * @return true --> مجوز دارید
      */
     protected fun forceInitVpnService(): Boolean {
         val intent = VpnService.prepare(this)
-        return if (intent == null) {
-            true
-        } else {
-            false
-        }
+        return intent == null
     }
 
     protected fun layoutTestClick() {
@@ -121,22 +123,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
             setTestStateLayout(getString(R.string.connection_test_testing))
             mainViewModel.testCurrentServerRealPing()
         } else {
-//                tv_test_state.text = getString(R.string.connection_test_fail)
-        }
-    }
-
-    protected fun addAndConnectV2ray(config: String): Boolean {
-        Log.d("MRB 2", "22")
-        delAndAddV2rayConfig(config)
-        Log.d("MRB 2", "233")
-        stopV2ray()
-        val intent = VpnService.prepare(this)
-        return if (intent == null) {
-            startV2Ray()
-            true
-        } else {
-            requestVpnPermission.launch(intent)
-            true
+            setTestStateLayout("No connection")
         }
     }
 
@@ -216,25 +203,31 @@ abstract class V2rayControllerActivity : BaseActivity() {
 //        }
 //    }
 
-    protected fun startV2Ray() {
+    protected fun V2RayStart() {
         if (mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER).isNullOrEmpty()) {
             return
         }
         V2RayServiceManager.startV2Ray(this)
     }
 
-    protected fun stopV2ray() {
-        if (mainViewModel.isRunning.value == true) {
-            Utils.stopVService(this)
+    protected fun V2rayStop(): Boolean {
+        try{
+            if (mainViewModel.isRunning.value == true) {
+                Utils.stopVService(this)
+                return true
+            }
+        }catch (e: Exception){
+            Log.d("V2ray err", e.toString())
         }
+        return false
     }
 
-    protected fun restartV2Ray() {
-        stopV2ray()
+    protected fun V2RayRestart() {
+        V2rayStop()
         Observable.timer(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                startV2Ray()
+                V2RayStart()
             }
     }
 
@@ -299,10 +292,6 @@ abstract class V2rayControllerActivity : BaseActivity() {
         mainViewModel.testAllRealPing()
     }
 
-    protected fun serviceRestart() {
-        restartV2Ray()
-    }
-
     protected fun delAndAddV2rayConfig(AConfig: String): Boolean {
         try {
             MmkvManager.removeAllServer()
@@ -311,7 +300,6 @@ abstract class V2rayControllerActivity : BaseActivity() {
 //            return false
         }
 
-        Log.d("MRB 2", "2")
         importBatchConfig(AConfig)
         return true
     }
@@ -431,7 +419,6 @@ abstract class V2rayControllerActivity : BaseActivity() {
     }
 
     private fun importBatchConfig(server: String?, subid: String = "") {
-        Log.d("MRB 2", "3")
         val subid2 = if (subid.isNullOrEmpty()) {
             mainViewModel.subscriptionId
         } else {
@@ -669,9 +656,9 @@ abstract class V2rayControllerActivity : BaseActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun onNavigationItemSelected(item: MenuItem): Boolean {
+    fun onNavigationItemSelected(item: Int): Boolean {
         // Handle navigation view item clicks here.
-        when (item.itemId) {
+        when (item) {
             //R.id.server_profile -> activityClass = MainActivity::class.java
             R.id.sub_setting -> {
                 startActivity(Intent(this, SubSettingActivity::class.java))
