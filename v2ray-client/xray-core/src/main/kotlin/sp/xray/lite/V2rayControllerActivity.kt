@@ -30,6 +30,7 @@ import sp.xray.lite.service.V2RayServiceManager
 import sp.xray.lite.ui.AboutActivity
 import sp.xray.lite.ui.BaseActivity
 import sp.xray.lite.ui.LogcatActivity
+import sp.xray.lite.ui.RoutingSettingsFragment
 import sp.xray.lite.ui.ScannerActivity
 import sp.xray.lite.ui.ServerActivity
 import sp.xray.lite.ui.SettingsActivity
@@ -84,6 +85,8 @@ abstract class V2rayControllerActivity : BaseActivity() {
     protected abstract fun getResultOpenVpn()
 
     // ..
+    protected var V2rayShowSpeedNotif: Boolean = true
+    protected var V2rayDirectURLORIP: String = ""
     val mainViewModel: MainViewModel by viewModels()
 
     protected fun fabClick() {
@@ -150,6 +153,13 @@ abstract class V2rayControllerActivity : BaseActivity() {
                     if (!it)
                         toast(R.string.toast_permission_denied)
                 }
+        }
+
+        if(settingsStorage?.decodeBool(AppConfig.PREF_SPEED_ENABLED) != V2rayShowSpeedNotif){
+            settingsStorage?.encode(AppConfig.PREF_SPEED_ENABLED, V2rayShowSpeedNotif)
+        }
+        if(settingsStorage?.decodeString(AppConfig.PREF_V2RAY_ROUTING_DIRECT) != V2rayDirectURLORIP) {
+            settingsStorage?.encode(AppConfig.PREF_V2RAY_ROUTING_DIRECT, V2rayDirectURLORIP)
         }
     }
 
