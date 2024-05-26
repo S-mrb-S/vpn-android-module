@@ -108,7 +108,7 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         CiscoConn.unbind(); // don't move to onStop
 
         super.onDestroy();

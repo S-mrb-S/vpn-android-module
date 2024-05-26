@@ -26,10 +26,7 @@ import de.blinkt.openvpn.core.VpnStatus;
  * by MehrabSp
  */
 public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControllerActivity {
-    protected OpenVPNThread vpnThread = new OpenVPNThread();
-    protected OpenVPNService vpnService = new OpenVPNService();
-    protected String OpenVpnStatus = "";
-    protected Boolean isOpenVpnALive = false;
+    private Boolean OpenVpnIsConnected = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,31 +41,24 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     }
 
     private void sendStatusToCallBack(String str) {
-        sendStatusToCallBack(str, false, null);
+        OpenVpnStatus(str, false, null);
+    }
+    private void sendStatusToCallBack(String str, Boolean err, String msg) {
+        OpenVpnStatus(str, err, msg);
     }
 
-    protected abstract void sendStatusToCallBack(String str, Boolean err, String errmsg);
-
-    /**
-     * @param v: click listener view
-     */
-    public void onClick(@NotNull String v) {
-        if (Objects.equals(v, "force_stop")) {// Vpn is running, user would like to
-            // disconnect current connection.
-            stopVpn();
-        }
-    }
+    protected abstract void OpenVpnStatus(String str, Boolean err, String errmsg);
 
     protected void onClick(ComponentActivity componentActivity, @NotNull String v,
                            @NotNull String config, String password,
                            String username) {
-        if (Objects.equals(v, "click")) {// Vpn is running, user would like to disconnect current
+        if (Objects.equals(v, "click")) { // Vpn is running, user would like to disconnect current
             // connection.
             prepareVpn(componentActivity, config, password, username);
         } else if (Objects.equals(v, "force_start")) {// Vpn is running, user would like to
             // disconnect current
             // connection.
-            if (stopVpn()) {
+            if (OpenVpnStopVpn()) {
                 // VPN is stopped, show a Toast message.
                 showToast("Disconnect Successfully");
             }
@@ -84,7 +74,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     private void prepareVpn(ComponentActivity componentActivity, String config,
                             String password,
                             String username) {
-        if (!isOpenVpnALive) {
+        if (!OpenVpnIsConnected) {
             // Checking permission for network monitor
             Intent intent = VpnService.prepare(this);
 
@@ -97,7 +87,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
                 }
             } else startVpn(config, password, username);//have already permission
 
-        } else if (stopVpn()) {
+        } else if (OpenVpnStopVpn()) {
 
             // VPN is stopped, show a Toast message.
             showToast("Disconnect Successfully");
@@ -109,10 +99,12 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
      *
      * @return boolean: VPN status
      */
-    public boolean stopVpn() {
+    protected boolean OpenVpnStopVpn() {
         try {
-            OpenVPNThread.stop();
-            return true;
+            if (OpenVpnIsConnected) {
+                OpenVPNThread.stop();
+                return true;
+            }
         } catch (Exception e) {
             sendStatusToCallBack("STOPTHREAD", true, e.toString());
         }
@@ -153,47 +145,23 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     /**
      * Receive broadcast message
      */
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
                 String status = intent.getStringExtra("state");
-                setStatus(status);
-                OpenVpnStatus = status; // no need
-                //                    case "CONNECTING":
-                //                        return R.string.state_connecting;
-                //                    case "WAIT":
-                //                        return R.string.state_wait;
-                //                    case "AUTH":
-                //                        return R.string.state_auth;
-                //                    case "GET_CONFIG":
-                //                        return R.string.state_get_config;
-                //                    case "ASSIGN_IP":
-                //                        return R.string.state_assign_ip;
-                //                    case "ADD_ROUTES":
-                //                        return R.string.state_add_routes;
-                //                    case "DISCONNECTED":
-                //                        return R.string.state_disconnected;
-                //                    case "RECONNECTING":
-                //                        return R.string.state_reconnecting;
-                //                    case "EXITING":
-                //                        return R.string.state_exiting;
-                //                    case "RESOLVE":
-                //                        return R.string.state_resolve;
-                //                    case "TCP_CONNECT":
-                //                        return R.string.state_tcp_connect;
-                //                    case "AUTH_PENDING":
-                //                        return R.string.state_auth_pending;
-                // ... and more
-                isOpenVpnALive = Objects.requireNonNull(status).equals("CONNECTED");
-
+                if(status != null){
+                    setStatus(status);
+                    if(status.equals("CONNECTED")){
+                        OpenVpnIsConnected = true;
+                    }
+                }
             } catch (Exception e) {
                 sendStatusToCallBack("SENDSTATUS", true, e.toString());
                 e.printStackTrace();
             }
 
             try {
-
                 String duration = intent.getStringExtra("duration");
                 String lastPacketReceive = intent.getStringExtra("lastPacketReceive");
                 String byteIn = intent.getStringExtra("byteIn");
@@ -214,11 +182,11 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
 
     /**
      * Update status UI
-     *
-     * @param duration:          running time
-     * @param lastPacketReceive: last packet receive time
-     * @param byteIn:            incoming data
-     * @param byteOut:           outgoing data
+     *  default:
+     * @param duration:          running time --> 00:00:00
+     * @param lastPacketReceive: last packet receive time --> 0
+     * @param byteIn:            incoming data --> null
+     * @param byteOut:           outgoing data --> null
      */
     protected abstract void updateConnectionStatus(String duration, String lastPacketReceive, String byteIn, String byteOut);
 
@@ -238,18 +206,17 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     protected void newOpenVpnServer(ComponentActivity componentActivity, String config,
                                     String password, String username) {
         // Stop previous connection
-        if (isOpenVpnALive) {
-            stopVpn();
+        if (OpenVpnIsConnected) {
+            OpenVpnStopVpn();
         }
 
         prepareVpn(componentActivity, config, password, username);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
-
 }
 
