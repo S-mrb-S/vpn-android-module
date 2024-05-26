@@ -7,7 +7,6 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +37,7 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
         try {
             createNotificationChannel(this, getChannelID(), getChannelIDName());
             String notifTitle = getContentTitle();
-            if(notifTitle != null) {
+            if (notifTitle != null) {
                 ContentTitle = getContentTitle();
             }
 
@@ -53,8 +52,9 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
     /**
      * by MehrabSp
      * for split tunnel
+     *
      * @param packageName Example: com.android.chrome
-     *  or just add package app name to appsList
+     *                    or just add package app name to appsList
      */
     @Keep
     public static void addDisallowedPackageApplication(String packageName) {

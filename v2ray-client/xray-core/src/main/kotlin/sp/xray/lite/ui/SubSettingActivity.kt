@@ -1,11 +1,11 @@
 package sp.xray.lite.ui
 
 import android.content.Intent
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import sp.xray.lite.R
-import android.os.Bundle
 import sp.xray.lite.databinding.ActivityXSubSettingBinding
 import sp.xray.lite.dto.SubscriptionItem
 import sp.xray.lite.util.MmkvManager
@@ -13,7 +13,7 @@ import sp.xray.lite.util.MmkvManager
 class SubSettingActivity : BaseActivity() {
     private lateinit var binding: ActivityXSubSettingBinding
 
-    var subscriptions:List<Pair<String, SubscriptionItem>> = listOf()
+    var subscriptions: List<Pair<String, SubscriptionItem>> = listOf()
     private val adapter by lazy { SubSettingRecyclerAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,7 @@ class SubSettingActivity : BaseActivity() {
             startActivity(Intent(this, SubEditActivity::class.java))
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 }

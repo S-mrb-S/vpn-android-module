@@ -134,7 +134,8 @@ object V2rayConfigUtil {
                 settingsStorage?.decodeBool(AppConfig.PREF_SNIFFING_ENABLED, true)
                     ?: true
             v2rayConfig.inbounds[0].sniffing?.enabled = fakedns || sniffAllTlsAndHttp
-            v2rayConfig.inbounds[0].sniffing?.routeOnly = settingsStorage?.decodeBool(AppConfig.PREF_ROUTE_ONLY_ENABLED, false)
+            v2rayConfig.inbounds[0].sniffing?.routeOnly =
+                settingsStorage?.decodeBool(AppConfig.PREF_ROUTE_ONLY_ENABLED, false)
             if (!sniffAllTlsAndHttp) {
                 v2rayConfig.inbounds[0].sniffing?.destOverride?.clear()
             }
@@ -227,12 +228,13 @@ object V2rayConfigUtil {
                 }
             }
 
-            if(routingMode != ERoutingMode.GLOBAL_DIRECT.value) {
+            if (routingMode != ERoutingMode.GLOBAL_DIRECT.value) {
                 v2rayConfig.routing.rules.add(
                     V2rayConfig.RoutingBean.RulesBean(
                         outboundTag = AppConfig.TAG_PROXY,
                         port = "0-65535"
-                    ))
+                    )
+                )
             }
 
         } catch (e: Exception) {
@@ -589,7 +591,8 @@ object V2rayConfigUtil {
                     mux = null
                 )
 
-            var packets = settingsStorage?.decodeString(AppConfig.PREF_FRAGMENT_PACKETS) ?: "tlshello"
+            var packets =
+                settingsStorage?.decodeString(AppConfig.PREF_FRAGMENT_PACKETS) ?: "tlshello"
             if (v2rayConfig.outbounds[0].streamSettings?.security == V2rayConfig.REALITY
                 && packets == "tlshello"
             ) {

@@ -1,10 +1,10 @@
 package sp.xray.lite.ui
 
 import android.os.Bundle
-import sp.xray.lite.R
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import sp.xray.lite.AppConfig
+import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXRoutingSettingsBinding
 
 class RoutingSettingsActivity : BaseActivity() {

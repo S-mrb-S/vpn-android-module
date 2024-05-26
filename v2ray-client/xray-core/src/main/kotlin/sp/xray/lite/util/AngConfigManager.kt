@@ -1071,7 +1071,8 @@ object AngConfigManager {
                     var count = 0
                     for (srv in serverList) {
                         val config = ServerConfig.create(EConfigType.CUSTOM)
-                        config.fullConfig =  Gson().fromJson(Gson().toJson(srv), V2rayConfig::class.java)
+                        config.fullConfig =
+                            Gson().fromJson(Gson().toJson(srv), V2rayConfig::class.java)
                         config.remarks = config.fullConfig?.remarks
                             ?: ("%04d-".format(count + 1) + System.currentTimeMillis()
                                 .toString())

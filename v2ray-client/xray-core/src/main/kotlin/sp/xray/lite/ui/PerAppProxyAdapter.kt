@@ -1,16 +1,19 @@
 package sp.xray.lite.ui
 
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import sp.xray.lite.R
 import sp.xray.lite.databinding.ItemXRecyclerBypassListBinding
 import sp.xray.lite.dto.AppInfo
-import java.util.*
 
-class PerAppProxyAdapter(val activity: BaseActivity, val apps: List<AppInfo>, blacklist: MutableSet<String>?) :
-        RecyclerView.Adapter<PerAppProxyAdapter.BaseViewHolder>() {
+class PerAppProxyAdapter(
+    val activity: BaseActivity,
+    val apps: List<AppInfo>,
+    blacklist: MutableSet<String>?
+) :
+    RecyclerView.Adapter<PerAppProxyAdapter.BaseViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_HEADER = 0
@@ -34,24 +37,34 @@ class PerAppProxyAdapter(val activity: BaseActivity, val apps: List<AppInfo>, bl
         return when (viewType) {
             VIEW_TYPE_HEADER -> {
                 val view = View(ctx)
-                view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ctx.resources.getDimensionPixelSize(R.dimen.bypass_list_header_height) * 0)
+                view.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ctx.resources.getDimensionPixelSize(R.dimen.bypass_list_header_height) * 0
+                )
                 BaseViewHolder(view)
             }
 //            VIEW_TYPE_ITEM -> AppViewHolder(ctx.layoutInflater
 //                    .inflate(R.layout.item_recycler_bypass_list, parent, false))
 
-            else -> AppViewHolder(ItemXRecyclerBypassListBinding.inflate(LayoutInflater.from(ctx), parent, false))
+            else -> AppViewHolder(
+                ItemXRecyclerBypassListBinding.inflate(
+                    LayoutInflater.from(ctx),
+                    parent,
+                    false
+                )
+            )
 
         }
     }
 
-    override fun getItemViewType(position: Int) = if (position == 0) VIEW_TYPE_HEADER else VIEW_TYPE_ITEM
+    override fun getItemViewType(position: Int) =
+        if (position == 0) VIEW_TYPE_HEADER else VIEW_TYPE_ITEM
 
     open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    inner class AppViewHolder(private val itemBypassBinding: ItemXRecyclerBypassListBinding) : BaseViewHolder(itemBypassBinding.root),
-            View.OnClickListener {
+    inner class AppViewHolder(private val itemBypassBinding: ItemXRecyclerBypassListBinding) :
+        BaseViewHolder(itemBypassBinding.root),
+        View.OnClickListener {
         private val inBlacklist: Boolean get() = blacklist.contains(appInfo.packageName)
         private lateinit var appInfo: AppInfo
 

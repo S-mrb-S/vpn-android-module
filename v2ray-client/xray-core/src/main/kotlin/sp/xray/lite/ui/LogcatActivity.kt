@@ -1,24 +1,21 @@
 package sp.xray.lite.ui
 
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import sp.xray.lite.AppConfig.ANG_PACKAGE
 import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXLogcatBinding
 import sp.xray.lite.extension.toast
 import sp.xray.lite.util.Utils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-
 import java.io.IOException
-import java.util.LinkedHashSet
 
 class LogcatActivity : BaseActivity() {
     private lateinit var binding: ActivityXLogcatBinding
@@ -82,10 +79,12 @@ class LogcatActivity : BaseActivity() {
             toast(R.string.toast_success)
             true
         }
+
         R.id.clear_all -> {
             logcat(true)
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 }

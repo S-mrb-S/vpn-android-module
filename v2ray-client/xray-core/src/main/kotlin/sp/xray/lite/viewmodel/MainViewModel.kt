@@ -16,6 +16,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.launch
 import sp.xray.lite.AngApplication
 import sp.xray.lite.AppConfig
 import sp.xray.lite.AppConfig.ANG_PACKAGE
@@ -32,11 +37,6 @@ import sp.xray.lite.util.MmkvManager.KEY_ANG_CONFIGS
 import sp.xray.lite.util.SpeedtestUtil
 import sp.xray.lite.util.Utils
 import sp.xray.lite.util.V2rayConfigUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.launch
 import java.util.Collections
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {

@@ -1,17 +1,23 @@
 package sp.xray.lite.ui
 
 import android.Manifest
-import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import com.tbruyelle.rxpermissions.RxPermissions
 import com.tencent.mmkv.MMKV
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import sp.xray.lite.AppConfig
 import sp.xray.lite.R
 import sp.xray.lite.databinding.FragmentXRoutingSettingsBinding
@@ -19,19 +25,25 @@ import sp.xray.lite.extension.toast
 import sp.xray.lite.extension.v2RayApplication
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class RoutingSettingsFragment : Fragment() {
     private lateinit var binding: FragmentXRoutingSettingsBinding
+
     companion object {
         private const val routing_arg = "routing_arg"
     }
 
-   private val settingsStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SETTING, MMKV.MULTI_PROCESS_MODE) }
+    private val settingsStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SETTING,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         binding = FragmentXRoutingSettingsBinding.inflate(layoutInflater)
         return binding.root// inflater.inflate(R.layout.fragment_routing_settings, container, false)
@@ -64,22 +76,27 @@ class RoutingSettingsFragment : Fragment() {
             saveRouting()
             true
         }
+
         R.id.del_routing -> {
             binding.etRoutingContent.text = null
             true
         }
+
         R.id.scan_replace -> {
             scanQRcode(true)
             true
         }
+
         R.id.scan_append -> {
             scanQRcode(false)
             true
         }
+
         R.id.default_rules -> {
             setDefaultRules()
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -96,33 +113,36 @@ class RoutingSettingsFragment : Fragment() {
 //                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP), requestCode)
 //        } catch (e: Exception) {
         RxPermissions(requireActivity())
-                .request(Manifest.permission.CAMERA)
-                .subscribe {
-                    if (it)
-                        if (forReplace)
-                            scanQRCodeForReplace.launch(Intent(activity, ScannerActivity::class.java))
-                        else
-                            scanQRCodeForAppend.launch(Intent(activity, ScannerActivity::class.java))
+            .request(Manifest.permission.CAMERA)
+            .subscribe {
+                if (it)
+                    if (forReplace)
+                        scanQRCodeForReplace.launch(Intent(activity, ScannerActivity::class.java))
                     else
-                        activity?.toast(R.string.toast_permission_denied)
-                }
+                        scanQRCodeForAppend.launch(Intent(activity, ScannerActivity::class.java))
+                else
+                    activity?.toast(R.string.toast_permission_denied)
+            }
 //        }
         return true
     }
 
-    private val scanQRCodeForReplace = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val content = it.data?.getStringExtra("SCAN_RESULT")
-            binding.etRoutingContent.text = Utils.getEditable(content!!)
+    private val scanQRCodeForReplace =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val content = it.data?.getStringExtra("SCAN_RESULT")
+                binding.etRoutingContent.text = Utils.getEditable(content!!)
+            }
         }
-    }
 
-    private val scanQRCodeForAppend = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val content = it.data?.getStringExtra("SCAN_RESULT")
-            binding.etRoutingContent.text = Utils.getEditable("${binding.etRoutingContent.text},$content")
+    private val scanQRCodeForAppend =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val content = it.data?.getStringExtra("SCAN_RESULT")
+                binding.etRoutingContent.text =
+                    Utils.getEditable("${binding.etRoutingContent.text},$content")
+            }
         }
-    }
 
     fun setDefaultRules(): Boolean {
         var url = AppConfig.v2rayCustomRoutingListUrl
@@ -131,9 +151,11 @@ class RoutingSettingsFragment : Fragment() {
             AppConfig.PREF_V2RAY_ROUTING_AGENT -> {
                 tag = AppConfig.TAG_PROXY
             }
+
             AppConfig.PREF_V2RAY_ROUTING_DIRECT -> {
                 tag = AppConfig.TAG_DIRECT
             }
+
             AppConfig.PREF_V2RAY_ROUTING_BLOCKED -> {
                 tag = AppConfig.TAG_BLOCKED
             }

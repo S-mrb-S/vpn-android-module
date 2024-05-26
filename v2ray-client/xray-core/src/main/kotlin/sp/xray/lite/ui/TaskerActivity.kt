@@ -1,18 +1,17 @@
 package sp.xray.lite.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import java.util.ArrayList
-import sp.xray.lite.R
 import android.content.Intent
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 import com.tencent.mmkv.MMKV
 import sp.xray.lite.AppConfig
+import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXTaskerBinding
 import sp.xray.lite.util.MmkvManager
 
@@ -23,7 +22,12 @@ class TaskerActivity : BaseActivity() {
     private var lstData: ArrayList<String> = ArrayList()
     private var lstGuid: ArrayList<String> = ArrayList()
 
-    private val serverStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SERVER_CONFIG, MMKV.MULTI_PROCESS_MODE) }
+    private val serverStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SERVER_CONFIG,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +45,10 @@ class TaskerActivity : BaseActivity() {
                 lstGuid.add(key)
             }
         }
-        val adapter = ArrayAdapter(this,
-                android.R.layout.simple_list_item_single_choice, lstData)
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_single_choice, lstData
+        )
         listview = findViewById<View>(R.id.listview) as ListView
         listview!!.adapter = adapter
 
@@ -77,7 +83,10 @@ class TaskerActivity : BaseActivity() {
         }
 
         val extraBundle = Bundle()
-        extraBundle.putBoolean(AppConfig.TASKER_EXTRA_BUNDLE_SWITCH, binding.switchStartService.isChecked)
+        extraBundle.putBoolean(
+            AppConfig.TASKER_EXTRA_BUNDLE_SWITCH,
+            binding.switchStartService.isChecked
+        )
         extraBundle.putString(AppConfig.TASKER_EXTRA_BUNDLE_GUID, lstGuid[position])
         val intent = Intent()
 
@@ -105,10 +114,12 @@ class TaskerActivity : BaseActivity() {
         R.id.del_config -> {
             true
         }
+
         R.id.save_config -> {
             confirmFinish()
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 

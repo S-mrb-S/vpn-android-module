@@ -22,7 +22,12 @@ class UserAssetUrlActivity : BaseActivity() {
     var save_config: MenuItem? = null
 
     val extDir by lazy { File(Utils.userAssetPath(this)) }
-    private val assetStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_ASSET, MMKV.MULTI_PROCESS_MODE) }
+    private val assetStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_ASSET,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
     private val editAssetId by lazy { intent.getStringExtra("assetId").orEmpty() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,7 +119,7 @@ class UserAssetUrlActivity : BaseActivity() {
                     MmkvManager.removeAssetUrl(editAssetId)
                     finish()
                 }
-                .setNegativeButton(android.R.string.no) {_, _ ->
+                .setNegativeButton(android.R.string.no) { _, _ ->
                     // do nothing
                 }
                 .show()
@@ -139,10 +144,12 @@ class UserAssetUrlActivity : BaseActivity() {
             deleteServer()
             true
         }
+
         R.id.save_config -> {
             saveServer()
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 }

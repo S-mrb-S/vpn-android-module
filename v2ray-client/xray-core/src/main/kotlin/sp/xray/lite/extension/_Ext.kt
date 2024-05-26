@@ -3,9 +3,9 @@ package sp.xray.lite.extension
 import android.content.Context
 import android.os.Build
 import android.widget.Toast
-import sp.xray.lite.AngApplication
 import me.drakeet.support.toast.ToastCompat
 import org.json.JSONObject
+import sp.xray.lite.AngApplication
 import sp.xray.lite.AppConfig
 import java.net.URI
 import java.net.URLConnection
@@ -14,11 +14,13 @@ val Context.v2RayApplication: AngApplication
     get() = applicationContext as AngApplication
 
 fun Context.toast(message: Int) {
-    if(AppConfig.Debug_Mode) ToastCompat.makeText(this, message, Toast.LENGTH_SHORT).apply { show() }
+    if (AppConfig.Debug_Mode) ToastCompat.makeText(this, message, Toast.LENGTH_SHORT)
+        .apply { show() }
 }
 
 fun Context.toast(message: CharSequence) {
-    if(AppConfig.Debug_Mode) ToastCompat.makeText(this, message, Toast.LENGTH_SHORT).apply { show() }
+    if (AppConfig.Debug_Mode) ToastCompat.makeText(this, message, Toast.LENGTH_SHORT)
+        .apply { show() }
 }
 
 fun JSONObject.putOpt(pair: Pair<String, Any?>) {

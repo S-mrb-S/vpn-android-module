@@ -29,8 +29,18 @@ import java.util.*
 
 object Utils {
 
-    private val mainStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
-    private val settingsStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SETTING, MMKV.MULTI_PROCESS_MODE) }
+    private val mainStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_MAIN,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
+    private val settingsStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SETTING,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
     /**
      * convert string to editalbe for kotlin
@@ -116,7 +126,8 @@ object Utils {
             Log.i(ANG_PACKAGE, "Parse base64 standard failed $e")
         }
         try {
-            return Base64.decode(text, Base64.NO_WRAP.or(Base64.URL_SAFE)).toString(charset("UTF-8"))
+            return Base64.decode(text, Base64.NO_WRAP.or(Base64.URL_SAFE))
+                .toString(charset("UTF-8"))
         } catch (e: Exception) {
             Log.i(ANG_PACKAGE, "Parse base64 url safe failed $e")
         }
@@ -139,7 +150,8 @@ object Utils {
      * get remote dns servers from preference
      */
     fun getRemoteDnsServers(): List<String> {
-        val remoteDns = settingsStorage?.decodeString(AppConfig.PREF_REMOTE_DNS) ?: AppConfig.DNS_PROXY
+        val remoteDns =
+            settingsStorage?.decodeString(AppConfig.PREF_REMOTE_DNS) ?: AppConfig.DNS_PROXY
         val ret = remoteDns.split(",").filter { isPureIpAddress(it) || isCoreDNSAddress(it) }
         if (ret.isEmpty()) {
             return listOf(AppConfig.DNS_PROXY)
@@ -148,7 +160,7 @@ object Utils {
     }
 
     fun getVpnDnsServers(): List<String> {
-        val vpnDns = settingsStorage?.decodeString(AppConfig.PREF_VPN_DNS)?:AppConfig.DNS_VPN
+        val vpnDns = settingsStorage?.decodeString(AppConfig.PREF_VPN_DNS) ?: AppConfig.DNS_VPN
         return vpnDns.split(",").filter { isPureIpAddress(it) }
         // allow empty, in that case dns will use system default
     }
@@ -157,7 +169,8 @@ object Utils {
      * get remote dns servers from preference
      */
     fun getDomesticDnsServers(): List<String> {
-        val domesticDns = settingsStorage?.decodeString(AppConfig.PREF_DOMESTIC_DNS) ?: AppConfig.DNS_DIRECT
+        val domesticDns =
+            settingsStorage?.decodeString(AppConfig.PREF_DOMESTIC_DNS) ?: AppConfig.DNS_DIRECT
         val ret = domesticDns.split(",").filter { isPureIpAddress(it) || isCoreDNSAddress(it) }
         if (ret.isEmpty()) {
             return listOf(AppConfig.DNS_DIRECT)
@@ -212,7 +225,8 @@ object Utils {
     }
 
     fun isIpv4Address(value: String): Boolean {
-        val regV4 = Regex("^([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$")
+        val regV4 =
+            Regex("^([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\\.([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$")
         return regV4.matches(value)
     }
 
@@ -222,7 +236,8 @@ object Utils {
             addr = addr.drop(1)
             addr = addr.dropLast(addr.count() - addr.lastIndexOf("]"))
         }
-        val regV6 = Regex("^((?:[0-9A-Fa-f]{1,4}))?((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))?((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$")
+        val regV6 =
+            Regex("^((?:[0-9A-Fa-f]{1,4}))?((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))?((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7}$")
         return regV6.matches(addr)
     }
 
@@ -235,7 +250,10 @@ object Utils {
      */
     fun isValidUrl(value: String?): Boolean {
         try {
-            if (value != null && Patterns.WEB_URL.matcher(value).matches() || URLUtil.isValidUrl(value)) {
+            if (value != null && Patterns.WEB_URL.matcher(value).matches() || URLUtil.isValidUrl(
+                    value
+                )
+            ) {
                 return true
             }
         } catch (e: Exception) {
@@ -312,7 +330,7 @@ object Utils {
         if (context == null)
             return ""
         val extDir = context.getExternalFilesDir(AppConfig.DIR_ASSETS)
-                ?: return context.getDir(AppConfig.DIR_ASSETS, 0).absolutePath
+            ?: return context.getDir(AppConfig.DIR_ASSETS, 0).absolutePath
         return extDir.absolutePath
     }
 
@@ -366,8 +384,10 @@ object Utils {
         conn.setRequestProperty("Connection", "close")
         conn.setRequestProperty("User-agent", "v2rayNG/1.8.25")
         url.userInfo?.let {
-            conn.setRequestProperty("Authorization",
-                "Basic ${encode(urlDecode(it))}")
+            conn.setRequestProperty(
+                "Authorization",
+                "Basic ${encode(urlDecode(it))}"
+            )
         }
         conn.useCaches = false
         return conn.inputStream.use {
@@ -398,7 +418,7 @@ object Utils {
 
     fun getLocale(context: Context): Locale =
         when (settingsStorage?.decodeString(AppConfig.PREF_LANGUAGE) ?: "auto") {
-            "auto" ->  getSysLocale()
+            "auto" -> getSysLocale()
             "en" -> Locale("en")
             "zh-rCN" -> Locale("zh", "CN")
             "zh-rTW" -> Locale("zh", "TW")
@@ -416,8 +436,8 @@ object Utils {
 
     fun fixIllegalUrl(str: String): String {
         return str
-            .replace(" ","%20")
-            .replace("|","%7C")
+            .replace(" ", "%20")
+            .replace("|", "%7C")
     }
 
     fun removeWhiteSpace(str: String?): String? {

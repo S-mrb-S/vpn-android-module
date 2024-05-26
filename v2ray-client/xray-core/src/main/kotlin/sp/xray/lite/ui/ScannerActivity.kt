@@ -1,29 +1,34 @@
 package sp.xray.lite.ui
 
 import android.Manifest
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.tbruyelle.rxpermissions.RxPermissions
 import com.tencent.mmkv.MMKV
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanCustomCode
+import io.github.g00fy2.quickie.config.ScannerConfig
 import sp.xray.lite.AppConfig
 import sp.xray.lite.R
 import sp.xray.lite.extension.toast
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.QRCodeDecoder
-import io.github.g00fy2.quickie.QRResult
-import io.github.g00fy2.quickie.ScanCustomCode
-import io.github.g00fy2.quickie.config.ScannerConfig
 
-class ScannerActivity : BaseActivity(){
+class ScannerActivity : BaseActivity() {
 
     private val scanQrCode = registerForActivityResult(ScanCustomCode(), ::handleResult)
-    private val settingsStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SETTING, MMKV.MULTI_PROCESS_MODE) }
+    private val settingsStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SETTING,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +38,7 @@ class ScannerActivity : BaseActivity(){
         }
     }
 
-    private fun launchScan(){
+    private fun launchScan() {
         scanQrCode.launch(
             ScannerConfig.build {
                 setHapticSuccessFeedback(true) // enable (default) or disable haptic feedback when a barcode was detected
@@ -44,7 +49,7 @@ class ScannerActivity : BaseActivity(){
     }
 
     private fun handleResult(result: QRResult) {
-        if (result is QRResult.QRSuccess ) {
+        if (result is QRResult.QRSuccess) {
             finished(result.content.rawValue!!)
         } else {
             finish()
@@ -68,6 +73,7 @@ class ScannerActivity : BaseActivity(){
             launchScan()
             true
         }
+
         R.id.select_photo -> {
             val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 Manifest.permission.READ_MEDIA_IMAGES
@@ -88,6 +94,7 @@ class ScannerActivity : BaseActivity(){
                 }
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -104,17 +111,18 @@ class ScannerActivity : BaseActivity(){
         }
     }
 
-    private val chooseFile = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        val uri = it.data?.data
-        if (it.resultCode == RESULT_OK && uri != null) {
-            try {
-                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
-                val text = QRCodeDecoder.syncDecodeQRCode(bitmap)
-                finished(text!!)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                toast(e.message.toString())
+    private val chooseFile =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val uri = it.data?.data
+            if (it.resultCode == RESULT_OK && uri != null) {
+                try {
+                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
+                    val text = QRCodeDecoder.syncDecodeQRCode(bitmap)
+                    finished(text!!)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    toast(e.message.toString())
+                }
             }
         }
-    }
 }

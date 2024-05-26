@@ -16,11 +16,11 @@ abstract class AngApplication : MultiDexApplication(), Configuration.Provider {
         application = this
     }
 
-    private fun angInit(){
+    private fun angInit() {
         AppConfig.ANG_PACKAGE = angPackage()
     }
 
-    protected fun setDebugMode(isDebugMode: Boolean){
+    protected fun setDebugMode(isDebugMode: Boolean) {
         AppConfig.Debug_Mode = isDebugMode
     }
 
@@ -32,7 +32,7 @@ abstract class AngApplication : MultiDexApplication(), Configuration.Provider {
     protected abstract fun angPackage(): String
 
     //var firstRun = false
-     //   private set
+    //   private set
 
     override fun onCreate() {
         super.onCreate()

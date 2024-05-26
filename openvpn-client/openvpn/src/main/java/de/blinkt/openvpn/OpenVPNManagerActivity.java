@@ -4,22 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.VpnService;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.widget.Toast;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 import de.blinkt.openvpn.core.App;
 import de.blinkt.openvpn.core.OpenVPNService;
@@ -47,6 +39,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     private void sendStatusToCallBack(String str) {
         OpenVpnStatus(str, false, null);
     }
+
     private void sendStatusToCallBack(String str, Boolean err, String msg) {
         OpenVpnStatus(str, err, msg);
     }
@@ -63,10 +56,11 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
         OpenVpnStartVpn(configC, passwordC, usernameC);
     }
 
-    protected void OpenVpnFabClick(String config, String password, String username){
-        if(!OpenVpnStopVpn())
-        {
-            configC = config; passwordC = password; usernameC = username;
+    protected void OpenVpnFabClick(String config, String password, String username) {
+        if (!OpenVpnStopVpn()) {
+            configC = config;
+            passwordC = password;
+            usernameC = username;
             sendRequestOpenVpnPermission();
         }
     }
@@ -117,9 +111,9 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
         public void onReceive(Context context, Intent intent) {
             try {
                 String status = intent.getStringExtra("state");
-                if(status != null){
+                if (status != null) {
                     sendStatusToCallBack(status);
-                    if(status.equals("CONNECTED")){
+                    if (status.equals("CONNECTED")) {
                         OpenVpnIsConnected = true;
                     }
                 }
@@ -149,7 +143,8 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
 
     /**
      * Update status UI
-     *  default:
+     * default:
+     *
      * @param duration:          running time --> 00:00:00
      * @param lastPacketReceive: last packet receive time --> 0
      * @param byteIn:            incoming data --> null

@@ -3,19 +3,27 @@ package sp.xray.lite.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import go.Seq
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.launch
+import libv2ray.Libv2ray
 import sp.xray.lite.AppConfig.MSG_MEASURE_CONFIG
 import sp.xray.lite.AppConfig.MSG_MEASURE_CONFIG_CANCEL
 import sp.xray.lite.AppConfig.MSG_MEASURE_CONFIG_SUCCESS
 import sp.xray.lite.util.MessageUtil
 import sp.xray.lite.util.SpeedtestUtil
 import sp.xray.lite.util.Utils
-import go.Seq
-import kotlinx.coroutines.*
-import libv2ray.Libv2ray
 import java.util.concurrent.Executors
 
 class V2RayTestService : Service() {
-    private val realTestScope by lazy { CoroutineScope(Executors.newFixedThreadPool(10).asCoroutineDispatcher()) }
+    private val realTestScope by lazy {
+        CoroutineScope(
+            Executors.newFixedThreadPool(10).asCoroutineDispatcher()
+        )
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -29,9 +37,14 @@ class V2RayTestService : Service() {
                 val contentPair = intent.getSerializableExtra("content") as Pair<String, String>
                 realTestScope.launch {
                     val result = SpeedtestUtil.realPing(contentPair.second)
-                    MessageUtil.sendMsg2UI(this@V2RayTestService, MSG_MEASURE_CONFIG_SUCCESS, Pair(contentPair.first, result))
+                    MessageUtil.sendMsg2UI(
+                        this@V2RayTestService,
+                        MSG_MEASURE_CONFIG_SUCCESS,
+                        Pair(contentPair.first, result)
+                    )
                 }
             }
+
             MSG_MEASURE_CONFIG_CANCEL -> {
                 realTestScope.coroutineContext[Job]?.cancelChildren()
             }

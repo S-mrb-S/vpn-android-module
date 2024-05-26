@@ -8,8 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.blacksquircle.ui.editorkit.utils.EditorTheme
 import com.blacksquircle.ui.language.json.JsonLanguage
-import com.google.gson.*
+import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import me.drakeet.support.toast.ToastCompat
 import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXServerCustomConfigBinding
 import sp.xray.lite.dto.EConfigType
@@ -18,13 +19,22 @@ import sp.xray.lite.dto.V2rayConfig
 import sp.xray.lite.extension.toast
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
-import me.drakeet.support.toast.ToastCompat
 
 class ServerCustomConfigActivity : BaseActivity() {
     private lateinit var binding: ActivityXServerCustomConfigBinding
 
-    private val mainStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
-    private val serverRawStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SERVER_RAW, MMKV.MULTI_PROCESS_MODE) }
+    private val mainStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_MAIN,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
+    private val serverRawStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SERVER_RAW,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
     private val editGuid by lazy { intent.getStringExtra("guid").orEmpty() }
     private val isRunning by lazy {
         intent.getBooleanExtra("isRunning", false)
@@ -58,7 +68,11 @@ class ServerCustomConfigActivity : BaseActivity() {
         binding.etRemarks.text = Utils.getEditable(config.remarks)
         val raw = serverRawStorage?.decodeString(editGuid)
         if (raw.isNullOrBlank()) {
-            binding.editor.setTextContent(Utils.getEditable(config.fullConfig?.toPrettyPrinting().orEmpty()))
+            binding.editor.setTextContent(
+                Utils.getEditable(
+                    config.fullConfig?.toPrettyPrinting().orEmpty()
+                )
+            )
         } else {
             binding.editor.setTextContent(Utils.getEditable(raw))
         }
@@ -86,11 +100,16 @@ class ServerCustomConfigActivity : BaseActivity() {
             Gson().fromJson(binding.editor.text.toString(), V2rayConfig::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
-            ToastCompat.makeText(this, "${getString(R.string.toast_malformed_josn)} ${e.cause?.message}", Toast.LENGTH_LONG).show()
+            ToastCompat.makeText(
+                this,
+                "${getString(R.string.toast_malformed_josn)} ${e.cause?.message}",
+                Toast.LENGTH_LONG
+            ).show()
             return false
         }
 
-        val config = MmkvManager.decodeServerConfig(editGuid) ?: ServerConfig.create(EConfigType.CUSTOM)
+        val config =
+            MmkvManager.decodeServerConfig(editGuid) ?: ServerConfig.create(EConfigType.CUSTOM)
         config.remarks = v2rayConfig.remarks ?: binding.etRemarks.text.toString().trim()
         config.fullConfig = v2rayConfig
 
@@ -107,14 +126,14 @@ class ServerCustomConfigActivity : BaseActivity() {
     private fun deleteServer(): Boolean {
         if (editGuid.isNotEmpty()) {
             AlertDialog.Builder(this).setMessage(R.string.del_config_comfirm)
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        MmkvManager.removeServer(editGuid)
-                        finish()
-                    }
-                    .setNegativeButton(android.R.string.no) {_, _ ->
-                        // do nothing
-                    }
-                    .show()
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    MmkvManager.removeServer(editGuid)
+                    finish()
+                }
+                .setNegativeButton(android.R.string.no) { _, _ ->
+                    // do nothing
+                }
+                .show()
         }
         return true
     }
@@ -141,10 +160,12 @@ class ServerCustomConfigActivity : BaseActivity() {
             deleteServer()
             true
         }
+
         R.id.save_config -> {
             saveServer()
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 }

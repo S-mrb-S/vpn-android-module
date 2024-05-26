@@ -8,9 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.tbruyelle.rxpermissions.RxPermissions
 import com.tencent.mmkv.MMKV
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import sp.xray.lite.AppConfig
 import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXSubSettingBinding
@@ -27,8 +32,6 @@ import sp.xray.lite.extension.toTrafficString
 import sp.xray.lite.extension.toast
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.net.HttpURLConnection
@@ -36,12 +39,22 @@ import java.net.InetSocketAddress
 import java.net.Proxy
 import java.net.URL
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
 
 class UserAssetActivity : BaseActivity() {
     private lateinit var binding: ActivityXSubSettingBinding
-    private val settingsStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SETTING, MMKV.MULTI_PROCESS_MODE) }
-    private val assetStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_ASSET, MMKV.MULTI_PROCESS_MODE) }
+    private val settingsStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SETTING,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
+    private val assetStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_ASSET,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
     val extDir by lazy { File(Utils.userAssetPath(this)) }
     val builtInGeoFiles = arrayOf("geosite.dat", "geoip.dat")
@@ -80,6 +93,7 @@ class UserAssetActivity : BaseActivity() {
             startActivity(intent)
             true
         }
+
         R.id.download_file -> {
             downloadGeoFiles()
             true
@@ -97,24 +111,24 @@ class UserAssetActivity : BaseActivity() {
         RxPermissions(this)
             .request(permission)
             .subscribe {
-            if (it) {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "*/*"
-                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                if (it) {
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                    intent.type = "*/*"
+                    intent.addCategory(Intent.CATEGORY_OPENABLE)
 
-                try {
-                    chooseFile.launch(
-                        Intent.createChooser(
-                            intent,
-                            getString(R.string.title_file_chooser)
+                    try {
+                        chooseFile.launch(
+                            Intent.createChooser(
+                                intent,
+                                getString(R.string.title_file_chooser)
+                            )
                         )
-                    )
-                } catch (ex: android.content.ActivityNotFoundException) {
-                    toast(R.string.toast_require_file_manager)
-                }
-            } else
-                toast(R.string.toast_permission_denied)
-        }
+                    } catch (ex: android.content.ActivityNotFoundException) {
+                        toast(R.string.toast_require_file_manager)
+                    }
+                } else
+                    toast(R.string.toast_permission_denied)
+            }
     }
 
     private val chooseFile =
@@ -168,7 +182,10 @@ class UserAssetActivity : BaseActivity() {
     }
 
     private fun downloadGeoFiles() {
-        val httpPort = Utils.parseInt(settingsStorage?.decodeString(AppConfig.PREF_HTTP_PORT), AppConfig.PORT_HTTP.toInt())
+        val httpPort = Utils.parseInt(
+            settingsStorage?.decodeString(AppConfig.PREF_HTTP_PORT),
+            AppConfig.PORT_HTTP.toInt()
+        )
 
         toast(R.string.msg_downloading_content)
         var assets = MmkvManager.decodeAssetUrls()
@@ -229,15 +246,18 @@ class UserAssetActivity : BaseActivity() {
             conn?.disconnect()
         }
     }
+
     private fun addBuiltInGeoItems(assets: List<Pair<String, AssetUrlItem>>): List<Pair<String, AssetUrlItem>> {
         val list = mutableListOf<Pair<String, AssetUrlItem>>()
         builtInGeoFiles
             .filter { geoFile -> assets.none { it.second.remarks == geoFile } }
-            .forEach { 
-                list.add(Utils.getUuid() to AssetUrlItem(
-                    it,
-                    AppConfig.GeoUrl + it
-                ))
+            .forEach {
+                list.add(
+                    Utils.getUuid() to AssetUrlItem(
+                        it,
+                        AppConfig.GeoUrl + it
+                    )
+                )
             }
 
         return list + assets
@@ -249,7 +269,8 @@ class UserAssetActivity : BaseActivity() {
                 ItemXRecyclerUserAssetBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             )
         }
 
@@ -264,18 +285,23 @@ class UserAssetActivity : BaseActivity() {
             holder.itemUserAssetBinding.assetName.text = item.second.remarks
 
             if (file != null) {
-                val dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM)
+                val dateFormat =
+                    DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM)
                 holder.itemUserAssetBinding.assetProperties.text =
-                    "${file.length().toTrafficString()}  •  ${dateFormat.format(Date(file.lastModified()))}"
+                    "${
+                        file.length().toTrafficString()
+                    }  •  ${dateFormat.format(Date(file.lastModified()))}"
             } else {
-                holder.itemUserAssetBinding.assetProperties.text = getString(R.string.msg_file_not_found)
+                holder.itemUserAssetBinding.assetProperties.text =
+                    getString(R.string.msg_file_not_found)
             }
 
             if (item.second.remarks in builtInGeoFiles && item.second.url == AppConfig.GeoUrl + item.second.remarks) {
                 holder.itemUserAssetBinding.layoutEdit.visibility = GONE
                 holder.itemUserAssetBinding.layoutRemove.visibility = GONE
             } else {
-                holder.itemUserAssetBinding.layoutEdit.visibility = item.second.url.let { if (it == "file") GONE else VISIBLE }
+                holder.itemUserAssetBinding.layoutEdit.visibility =
+                    item.second.url.let { if (it == "file") GONE else VISIBLE }
                 holder.itemUserAssetBinding.layoutRemove.visibility = VISIBLE
             }
 

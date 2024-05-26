@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
 import sp.xray.lite.AngApplication.Companion.application
 import sp.xray.lite.AppConfig
 import sp.xray.lite.R
@@ -26,21 +28,29 @@ import sp.xray.lite.service.V2RayServiceManager
 import sp.xray.lite.util.AngConfigManager
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
-class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<MainRecyclerAdapter.BaseViewHolder>()
-        , ItemTouchHelperAdapter {
+class MainRecyclerAdapter(val activity: MainActivity) :
+    RecyclerView.Adapter<MainRecyclerAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
     companion object {
         private const val VIEW_TYPE_ITEM = 1
         private const val VIEW_TYPE_FOOTER = 2
     }
 
     private var mActivity: MainActivity = activity
-    private val mainStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
+    private val mainStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_MAIN,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
     private val subStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SUB, MMKV.MULTI_PROCESS_MODE) }
-    private val settingsStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_SETTING, MMKV.MULTI_PROCESS_MODE) }
+    private val settingsStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_SETTING,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
     private val share_method: Array<out String> by lazy {
         mActivity.resources.getStringArray(R.array.share_method)
     }
@@ -68,9 +78,19 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
             holder.itemView.setBackgroundColor(Color.TRANSPARENT)
             holder.itemMainBinding.tvTestResult.text = aff?.getTestDelayString() ?: ""
             if ((aff?.testDelayMillis ?: 0L) < 0L) {
-                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPingRed))
+                holder.itemMainBinding.tvTestResult.setTextColor(
+                    ContextCompat.getColor(
+                        mActivity,
+                        R.color.colorPingRed
+                    )
+                )
             } else {
-                holder.itemMainBinding.tvTestResult.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPing))
+                holder.itemMainBinding.tvTestResult.setTextColor(
+                    ContextCompat.getColor(
+                        mActivity,
+                        R.color.colorPing
+                    )
+                )
             }
             if (guid == mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER)) {
                 holder.itemMainBinding.layoutIndicator.setBackgroundResource(R.color.colorAccent)
@@ -87,17 +107,21 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
             var shareOptions = share_method.asList()
             when (config.configType) {
                 EConfigType.CUSTOM -> {
-                    holder.itemMainBinding.tvType.text = mActivity.getString(R.string.server_customize_config)
+                    holder.itemMainBinding.tvType.text =
+                        mActivity.getString(R.string.server_customize_config)
                     shareOptions = shareOptions.takeLast(1)
                 }
+
                 EConfigType.VLESS -> {
                     holder.itemMainBinding.tvType.text = config.configType.name
                 }
+
                 else -> {
                     holder.itemMainBinding.tvType.text = config.configType.name.lowercase()
                 }
             }
-            val strState = "${outbound?.getServerAddress()?.dropLast(3)}*** : ${outbound?.getServerPort()}"
+            val strState =
+                "${outbound?.getServerAddress()?.dropLast(3)}*** : ${outbound?.getServerPort()}"
             holder.itemMainBinding.tvStatistics.text = strState
 
             holder.itemMainBinding.layoutShare.setOnClickListener {
@@ -108,11 +132,17 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
                                 if (config.configType == EConfigType.CUSTOM) {
                                     shareFullContent(guid)
                                 } else {
-                                    val ivBinding = ItemXQrcodeBinding.inflate(LayoutInflater.from(mActivity))
-                                    ivBinding.ivQcode.setImageBitmap(AngConfigManager.share2QRCode(guid))
+                                    val ivBinding =
+                                        ItemXQrcodeBinding.inflate(LayoutInflater.from(mActivity))
+                                    ivBinding.ivQcode.setImageBitmap(
+                                        AngConfigManager.share2QRCode(
+                                            guid
+                                        )
+                                    )
                                     AlertDialog.Builder(mActivity).setView(ivBinding.root).show()
                                 }
                             }
+
                             1 -> {
                                 if (AngConfigManager.share2Clipboard(mActivity, guid) == 0) {
                                     mActivity.toast(R.string.toast_success)
@@ -120,6 +150,7 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
                                     mActivity.toast(R.string.toast_failure)
                                 }
                             }
+
                             2 -> shareFullContent(guid)
                             else -> mActivity.toast("else")
                         }
@@ -131,9 +162,14 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
 
             holder.itemMainBinding.layoutEdit.setOnClickListener {
                 val intent = Intent().putExtra("guid", guid)
-                        .putExtra("isRunning", isRunning)
+                    .putExtra("isRunning", isRunning)
                 if (config.configType == EConfigType.CUSTOM) {
-                    mActivity.startActivity(intent.setClass(mActivity, ServerCustomConfigActivity::class.java))
+                    mActivity.startActivity(
+                        intent.setClass(
+                            mActivity,
+                            ServerCustomConfigActivity::class.java
+                        )
+                    )
                 } else {
                     mActivity.startActivity(intent.setClass(mActivity, ServerActivity::class.java))
                 }
@@ -145,7 +181,7 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
                             .setPositiveButton(android.R.string.ok) { _, _ ->
                                 removeServer(guid, position)
                             }
-                            .setNegativeButton(android.R.string.no) {_, _ ->
+                            .setNegativeButton(android.R.string.no) { _, _ ->
                                 //do noting
                             }
                             .show()
@@ -169,10 +205,10 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
                     if (isRunning) {
                         Utils.stopVService(mActivity)
                         Observable.timer(500, TimeUnit.MILLISECONDS)
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe {
-                                    V2RayServiceManager.startV2Ray(mActivity)
-                                }
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                V2RayServiceManager.startV2Ray(mActivity)
+                            }
                     }
                 }
             }
@@ -183,7 +219,10 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
                 holder.itemFooterBinding.layoutEdit.visibility = View.INVISIBLE
             } else {
                 holder.itemFooterBinding.layoutEdit.setOnClickListener {
-                    Utils.openUri(mActivity, "${Utils.decode(AppConfig.PromotionUrl)}?t=${System.currentTimeMillis()}")
+                    Utils.openUri(
+                        mActivity,
+                        "${Utils.decode(AppConfig.PromotionUrl)}?t=${System.currentTimeMillis()}"
+                    )
                 }
             }
         }
@@ -197,7 +236,7 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
         }
     }
 
-    private  fun removeServer(guid: String,position:Int) {
+    private fun removeServer(guid: String, position: Int) {
         mActivity.mainViewModel.removeServer(guid)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, mActivity.mainViewModel.serversCache.size)
@@ -206,9 +245,22 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             VIEW_TYPE_ITEM ->
-                MainViewHolder(ItemXRecyclerMainBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                MainViewHolder(
+                    ItemXRecyclerMainBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+
             else ->
-                FooterViewHolder(ItemXRecyclerFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                FooterViewHolder(
+                    ItemXRecyclerFooterBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
         }
     }
 
@@ -231,10 +283,10 @@ class MainRecyclerAdapter(val activity: MainActivity) : RecyclerView.Adapter<Mai
     }
 
     class MainViewHolder(val itemMainBinding: ItemXRecyclerMainBinding) :
-            BaseViewHolder(itemMainBinding.root), ItemTouchHelperViewHolder
+        BaseViewHolder(itemMainBinding.root), ItemTouchHelperViewHolder
 
     class FooterViewHolder(val itemFooterBinding: ItemXRecyclerFooterBinding) :
-            BaseViewHolder(itemFooterBinding.root)
+        BaseViewHolder(itemFooterBinding.root)
 
     override fun onItemDismiss(position: Int) {
         val guid = mActivity.mainViewModel.serversCache.getOrNull(position)?.guid ?: return

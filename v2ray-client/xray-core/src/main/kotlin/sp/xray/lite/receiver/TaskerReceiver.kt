@@ -12,7 +12,12 @@ import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
 
 class TaskerReceiver : BroadcastReceiver() {
-    private val mainStorage by lazy { MMKV.mmkvWithID(MmkvManager.ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
+    private val mainStorage by lazy {
+        MMKV.mmkvWithID(
+            MmkvManager.ID_MAIN,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    }
 
     override fun onReceive(context: Context, intent: Intent?) {
 

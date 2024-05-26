@@ -5,22 +5,14 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
-import androidx.work.multiprocess.RemoteWorkManager
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
-import sp.xray.lite.AngApplication
 import sp.xray.lite.R
 import sp.xray.lite.databinding.ActivityXSubEditBinding
 import sp.xray.lite.dto.SubscriptionItem
 import sp.xray.lite.extension.toast
-import sp.xray.lite.service.SubscriptionUpdater
 import sp.xray.lite.util.MmkvManager
 import sp.xray.lite.util.Utils
-import java.util.concurrent.TimeUnit
 
 class SubEditActivity : BaseActivity() {
     private lateinit var binding: ActivityXSubEditBinding
@@ -107,14 +99,14 @@ class SubEditActivity : BaseActivity() {
     private fun deleteServer(): Boolean {
         if (editSubId.isNotEmpty()) {
             AlertDialog.Builder(this).setMessage(R.string.del_config_comfirm)
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        MmkvManager.removeSubscription(editSubId)
-                        finish()
-                    }
-                    .setNegativeButton(android.R.string.no) {_, _ ->
-                        // do nothing
-                    }
-                    .show()
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    MmkvManager.removeSubscription(editSubId)
+                    finish()
+                }
+                .setNegativeButton(android.R.string.no) { _, _ ->
+                    // do nothing
+                }
+                .show()
         }
         return true
     }
@@ -136,10 +128,12 @@ class SubEditActivity : BaseActivity() {
             deleteServer()
             true
         }
+
         R.id.save_config -> {
             saveServer()
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 

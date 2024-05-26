@@ -63,7 +63,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
                 val requestCode = it.data?.getIntExtra("REQUEST_CODE", -1)
                 if (requestCode == 5) {
                     getResultOpenVpn()
-                }else{
+                } else {
                     startV2Ray()
                 }
             }
@@ -80,6 +80,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
             requestVpnPermission.launch(intent)
         }
     }
+
     protected abstract fun getResultOpenVpn()
 
     // ..
@@ -212,7 +213,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
         V2RayServiceManager.startV2Ray(this)
     }
 
-    protected fun stopV2ray(){
+    protected fun stopV2ray() {
         if (mainViewModel.isRunning.value == true) {
             Utils.stopVService(this)
         }

@@ -17,13 +17,27 @@ class WidgetProvider : AppWidgetProvider() {
     /**
      * 每次窗口小部件被更新都调用一次该方法
      */
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-        updateWidgetBackground(context, appWidgetManager, appWidgetIds, V2RayServiceManager.v2rayPoint.isRunning)
+        updateWidgetBackground(
+            context,
+            appWidgetManager,
+            appWidgetIds,
+            V2RayServiceManager.v2rayPoint.isRunning
+        )
     }
 
 
-    private fun updateWidgetBackground(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray, isRunning: Boolean) {
+    private fun updateWidgetBackground(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+        isRunning: Boolean
+    ) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_x_switch)
         val intent = Intent(context, WidgetProvider::class.java)
         intent.action = AppConfig.BROADCAST_ACTION_WIDGET_CLICK
@@ -35,14 +49,23 @@ class WidgetProvider : AppWidgetProvider() {
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
-            })
+            }
+        )
         remoteViews.setOnClickPendingIntent(R.id.layout_switch, pendingIntent)
         if (isRunning) {
             remoteViews.setInt(R.id.image_switch, "setImageResource", R.drawable.ic_stop_24dp)
-            remoteViews.setInt(R.id.layout_background, "setBackgroundResource", R.drawable.ic_rounded_corner_active)
+            remoteViews.setInt(
+                R.id.layout_background,
+                "setBackgroundResource",
+                R.drawable.ic_rounded_corner_active
+            )
         } else {
             remoteViews.setInt(R.id.image_switch, "setImageResource", R.drawable.ic_play_24dp)
-            remoteViews.setInt(R.id.layout_background, "setBackgroundResource", R.drawable.ic_rounded_corner_inactive)
+            remoteViews.setInt(
+                R.id.layout_background,
+                "setBackgroundResource",
+                R.drawable.ic_rounded_corner_inactive
+            )
         }
 
         for (appWidgetId in appWidgetIds) {
@@ -65,12 +88,31 @@ class WidgetProvider : AppWidgetProvider() {
             AppWidgetManager.getInstance(context)?.let { manager ->
                 when (intent.getIntExtra("key", 0)) {
                     AppConfig.MSG_STATE_RUNNING, AppConfig.MSG_STATE_START_SUCCESS -> {
-                        updateWidgetBackground(context, manager, manager.getAppWidgetIds(ComponentName(context, WidgetProvider::class.java)),
-                                true)
+                        updateWidgetBackground(
+                            context,
+                            manager,
+                            manager.getAppWidgetIds(
+                                ComponentName(
+                                    context,
+                                    WidgetProvider::class.java
+                                )
+                            ),
+                            true
+                        )
                     }
+
                     AppConfig.MSG_STATE_NOT_RUNNING, AppConfig.MSG_STATE_START_FAILURE, AppConfig.MSG_STATE_STOP_SUCCESS -> {
-                        updateWidgetBackground(context, manager, manager.getAppWidgetIds(ComponentName(context, WidgetProvider::class.java)),
-                                false)
+                        updateWidgetBackground(
+                            context,
+                            manager,
+                            manager.getAppWidgetIds(
+                                ComponentName(
+                                    context,
+                                    WidgetProvider::class.java
+                                )
+                            ),
+                            false
+                        )
                     }
                 }
             }
