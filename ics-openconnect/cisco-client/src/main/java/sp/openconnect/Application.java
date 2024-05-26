@@ -40,7 +40,7 @@ public abstract class Application extends de.blinkt.openvpn.core.App {
 			ProfileManager.init(getApplicationContext());
 			FragCache.init();
 		}catch (Exception e){
-			Log.d("OPENCONNECT err", e.toString());
+			e.printStackTrace();
 		}
 	}
 

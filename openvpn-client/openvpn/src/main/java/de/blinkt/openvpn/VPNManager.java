@@ -42,8 +42,7 @@ public final class VPNManager {
     private static boolean vpnStart = false;
     private static StatusCallback statusCallback;
 
-    @NotNull
-    private static final Context contextApplication = App.contextApplication;
+    private static final Context contextApplication = null; // TODO()
 
     /**
      * run on activity!

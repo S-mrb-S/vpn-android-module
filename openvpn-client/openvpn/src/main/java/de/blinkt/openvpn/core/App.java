@@ -7,6 +7,9 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -18,14 +21,15 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
     public static String ContentTitle = "OpenVpn"; // Notif title
     static NotificationManager manager;
     static ArrayList<String> appsList = new ArrayList<>(); // SplitTunnel Apps
-    public static Context contextApplication = null;
     public static Boolean isShowToastOpenVpn = false;
 
     protected abstract String getContentTitle();
 
-    protected abstract String getChannelID();
+    @NotNull
+    protected abstract String getChannelID(); // com.example.myapp
 
-    protected abstract String getChannelIDName();
+    @NotNull
+    protected abstract String getChannelIDName(); // comexamplemyapp
 
     @Override
     public void onCreate() {
@@ -33,12 +37,14 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
 
         try {
             createNotificationChannel(this, getChannelID(), getChannelIDName());
-            ContentTitle = getContentTitle();
+            String notifTitle = getContentTitle();
+            if(notifTitle != null) {
+                ContentTitle = getContentTitle();
+            }
 
             PRNGFixes.apply();
             StatusListener mStatus = new StatusListener();
             mStatus.init(this);
-            contextApplication = this;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,8 +52,9 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
 
     /**
      * by MehrabSp
-     *
+     * for split tunnel
      * @param packageName Example: com.android.chrome
+     *  or just add package app name to appsList
      */
     @Keep
     public static void addDisallowedPackageApplication(String packageName) {
