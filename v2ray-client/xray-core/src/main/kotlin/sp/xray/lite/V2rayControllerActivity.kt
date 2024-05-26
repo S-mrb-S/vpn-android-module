@@ -60,9 +60,29 @@ abstract class V2rayControllerActivity : BaseActivity() {
     private val requestVpnPermission =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                startV2Ray()
+                val requestCode = it.data?.getIntExtra("REQUEST_CODE", -1)
+                if (requestCode == 5) {
+                    getResultOpenVpn()
+                }else{
+                    startV2Ray()
+                }
             }
         }
+
+    // for OpenVpn
+    protected fun sendRequestOpenVpnPermission() {
+        val intent = VpnService.prepare(this)
+
+        if (intent == null) {
+            getResultOpenVpn()
+        } else {
+            intent.putExtra("REQUEST_CODE", 5)
+            requestVpnPermission.launch(intent)
+        }
+    }
+    protected abstract fun getResultOpenVpn()
+
+    // ..
     val mainViewModel: MainViewModel by viewModels()
 
     protected fun fabClick() {
