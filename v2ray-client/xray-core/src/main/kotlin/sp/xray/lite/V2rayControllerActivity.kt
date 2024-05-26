@@ -92,15 +92,6 @@ abstract class V2rayControllerActivity : BaseActivity() {
         }
     }
 
-    protected fun forceV2rayStop(): Boolean {
-        return try {
-            Utils.stopVService(this)
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
-
     protected fun layoutTestClick() {
         if (mainViewModel.isRunning.value == true) {
             setTestStateLayout(getString(R.string.connection_test_testing))
@@ -114,7 +105,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
         Log.d("MRB 2", "22")
         delAndAddV2rayConfig(config)
         Log.d("MRB 2", "233")
-        forceV2rayStop()
+        stopV2ray()
         val intent = VpnService.prepare(this)
         return if (intent == null) {
             startV2Ray()
@@ -201,10 +192,14 @@ abstract class V2rayControllerActivity : BaseActivity() {
         V2RayServiceManager.startV2Ray(this)
     }
 
-    protected fun restartV2Ray() {
+    protected fun stopV2ray(){
         if (mainViewModel.isRunning.value == true) {
             Utils.stopVService(this)
         }
+    }
+
+    protected fun restartV2Ray() {
+        stopV2ray()
         Observable.timer(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
