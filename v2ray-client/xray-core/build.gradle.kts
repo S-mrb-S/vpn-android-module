@@ -43,6 +43,9 @@ dependencies {
     api(project(":libv2ray"))
     testImplementation("junit:junit:4.13.2")
 
+    // don't change library versions
+    // all versions supported sdk 33
+
     // Androidx
     api("androidx.constraintlayout:constraintlayout:2.1.4")
     api("androidx.legacy:legacy-support-v4:1.0.0")

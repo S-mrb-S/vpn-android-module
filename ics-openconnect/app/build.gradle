@@ -10,16 +10,16 @@ android {
         minSdkVersion 19
         targetSdkVersion 33
 
-        versionCode 1122
-        versionName '1.11.2'
+        versionCode 1123
+        versionName '1.11.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release {
-            storeFile file('/home/mehrab/Desktop/mrb/Android/keys/2024.jks')
-            storePassword 'Mehrab1104'
-            keyAlias 'key0'
-            keyPassword 'Mehrab1104'
+//            storeFile file('/home/mehrab/Desktop/mrb/Android/keys/2024.jks')
+//            storePassword 'Mehrab1104'
+//            keyAlias 'key0'
+//            keyPassword 'Mehrab1104'
         }
     }
     buildTypes {
