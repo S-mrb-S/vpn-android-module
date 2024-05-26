@@ -59,9 +59,8 @@ public class OpenVPNThread implements Runnable {
         mProcess.destroy();
     }
 
-    void setReplaceConnection()
-    {
-        mNoProcessExitStatus=true;
+    void setReplaceConnection() {
+        mNoProcessExitStatus = true;
     }
 
     @Override
@@ -124,7 +123,7 @@ public class OpenVPNThread implements Runnable {
         }
     }
 
-    public static boolean stop(){
+    public static boolean stop() {
         mService.openvpnStopped();
         mProcess.destroy();
         return true;
@@ -187,7 +186,7 @@ public class OpenVPNThread implements Runnable {
                         logerror = 1;
 
                     VpnStatus.logMessageOpenVPN(logStatus, logLevel, msg);
-                    if (logerror==1)
+                    if (logerror == 1)
                         VpnStatus.logError("OpenSSL reported a certificate with a weak hash, please the in app FAQ about weak hashes");
 
                 } else {

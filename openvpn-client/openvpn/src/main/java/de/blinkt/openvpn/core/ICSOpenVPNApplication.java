@@ -12,8 +12,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-
 import android.os.StrictMode;
+
 import de.blinkt.openvpn.BuildConfig;
 import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.api.AppRestrictions;
@@ -23,7 +23,7 @@ public class ICSOpenVPNApplication extends Application {
 
     @Override
     public void onCreate() {
-        if("robolectric".equals(Build.FINGERPRINT))
+        if ("robolectric".equals(Build.FINGERPRINT))
             return;
 
         super.onCreate();

@@ -91,12 +91,11 @@ public class RemoteAction extends Activity {
         finish();
 
 
-
     }
 
     @Override
     public void finish() {
-        if(mService!=null) {
+        if (mService != null) {
             mService = null;
             getApplicationContext().unbindService(mConnection);
         }

@@ -13,15 +13,14 @@ import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import de.blinkt.openvpn.core.App;
-import de.blinkt.openvpn.core.OpenVPNService;
-import de.blinkt.openvpn.core.OpenVPNStatusService;
-import de.blinkt.openvpn.core.OpenVPNThread;
-import de.blinkt.openvpn.core.VpnStatus;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+import de.blinkt.openvpn.core.App;
+import de.blinkt.openvpn.core.OpenVPNService;
+import de.blinkt.openvpn.core.OpenVPNThread;
+import de.blinkt.openvpn.core.VpnStatus;
 
 /**
  * by MehrabSp
@@ -44,9 +43,10 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
                 new IntentFilter("connectionState"));
     }
 
-    private void sendStatusToCallBack(String str){
+    private void sendStatusToCallBack(String str) {
         sendStatusToCallBack(str, false, null);
     }
+
     protected abstract void sendStatusToCallBack(String str, Boolean err, String errmsg);
 
     /**
@@ -60,8 +60,8 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
     }
 
     protected void onClick(ComponentActivity componentActivity, @NotNull String v,
-                        @NotNull String config, String password,
-                        String username) {
+                           @NotNull String config, String password,
+                           String username) {
         if (Objects.equals(v, "click")) {// Vpn is running, user would like to disconnect current
             // connection.
             prepareVpn(componentActivity, config, password, username);
@@ -82,16 +82,16 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
      * Prepare for vpn connect with required permission
      */
     private void prepareVpn(ComponentActivity componentActivity, String config,
-                                   String password,
-                                   String username) {
+                            String password,
+                            String username) {
         if (!isOpenVpnALive) {
             // Checking permission for network monitor
             Intent intent = VpnService.prepare(this);
 
             if (intent != null) {
-                try{
+                try {
                     componentActivity.startActivityForResult(intent, 1);
-                }catch (Exception e){
+                } catch (Exception e) {
                     sendStatusToCallBack("VPNSERVICE", true, e.toString());
                     e.printStackTrace();
                 }
@@ -228,7 +228,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
      * @param message: toast message
      */
     public void showToast(String message) {
-        if(App.isShowToastOpenVpn)
+        if (App.isShowToastOpenVpn)
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -236,7 +236,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
      * Change server when user select new server
      */
     protected void newOpenVpnServer(ComponentActivity componentActivity, String config,
-                                 String password, String username) {
+                                    String password, String username) {
         // Stop previous connection
         if (isOpenVpnALive) {
             stopVpn();
@@ -244,6 +244,7 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
 
         prepareVpn(componentActivity, config, password, username);
     }
+
     @Override
     public void onPause() {
         super.onPause();

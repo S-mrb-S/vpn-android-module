@@ -5,14 +5,14 @@
 
 package de.blinkt.openvpn.core;
 
+import static java.lang.Math.max;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Vector;
-
-import static java.lang.Math.max;
 
 /**
  * Created by arne on 23.05.17.

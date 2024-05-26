@@ -6,23 +6,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.VpnService;
 import android.os.RemoteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import de.blinkt.openvpn.core.App;
-import de.blinkt.openvpn.core.OpenVPNService;
-import de.blinkt.openvpn.core.OpenVPNThread;
-import de.blinkt.openvpn.core.VpnStatus;
 
 import com.tencent.mmkv.MMKV;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+import de.blinkt.openvpn.core.App;
+import de.blinkt.openvpn.core.OpenVPNService;
+import de.blinkt.openvpn.core.OpenVPNThread;
+import de.blinkt.openvpn.core.VpnStatus;
 
 /**
  * by MehrabSp
@@ -35,6 +33,7 @@ public final class VPNManager {
 
     public interface StatusCallback {
         void onStatusResult(String status);
+
         void onStatusResult(String status, Boolean err, String errmsg);
     }
 
@@ -52,6 +51,7 @@ public final class VPNManager {
     public void onCreateView() {
         onCreateView(false);
     }
+
     public void onCreateView(Boolean initMmkv) {
         initializeMMKV(initMmkv);
 
@@ -64,22 +64,24 @@ public final class VPNManager {
      * Initialize all variable and object
      */
     private void initializeMMKV(Boolean initMmkv) {
-        if(initMmkv)
+        if (initMmkv)
             MMKV.initialize(contextApplication);
     }
 
     /**
      * Status
+     *
      * @param callback Status with callback
      */
     public static void setRetCallBackStatus(StatusCallback callback) {
         statusCallback = callback;
     }
 
-    private static void sendStatusToCallBack(String str){
+    private static void sendStatusToCallBack(String str) {
         statusCallback.onStatusResult(str, false, null);
     }
-    private static void sendStatusToCallBack(String str, Boolean err, String errmsg){
+
+    private static void sendStatusToCallBack(String str, Boolean err, String errmsg) {
         statusCallback.onStatusResult(str, err, errmsg);
     }
 
@@ -127,9 +129,9 @@ public final class VPNManager {
             Intent intent = VpnService.prepare(contextApplication);
 
             if (intent != null) {
-                try{
+                try {
                     componentActivity.startActivityForResult(intent, 1);
-                }catch (Exception e){
+                } catch (Exception e) {
                     sendStatusToCallBack("VPNSERVICE", true, e.toString());
                     e.printStackTrace();
                 }
@@ -247,7 +249,7 @@ public final class VPNManager {
      * @param message: toast message
      */
     public static void showToast(String message) {
-        if(App.isShowToastOpenVpn)
+        if (App.isShowToastOpenVpn)
             Toast.makeText(contextApplication, message, Toast.LENGTH_SHORT).show();
     }
 

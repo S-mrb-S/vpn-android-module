@@ -30,7 +30,6 @@ public class DisconnectVPN extends Activity implements DialogInterface.OnClickLi
     private ServiceConnection mConnection = new ServiceConnection() {
 
 
-
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {

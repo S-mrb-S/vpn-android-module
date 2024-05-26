@@ -13,12 +13,11 @@ import android.net.LocalSocketAddress;
 import android.os.Build;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import android.system.Os;
 import android.util.Log;
-import de.blinkt.openvpn.R;
-import de.blinkt.openvpn.VpnProfile;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -27,7 +26,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Vector;
+
+import de.blinkt.openvpn.R;
+import de.blinkt.openvpn.VpnProfile;
 
 public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
 
@@ -249,7 +255,8 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
                 NativeUtils.jniclose(fdint);
             }
             return;
-        } catch ( NoSuchMethodException | IllegalArgumentException | InvocationTargetException | IllegalAccessException | NullPointerException e) {
+        } catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException |
+                 IllegalAccessException | NullPointerException e) {
             VpnStatus.logException("Failed to retrieve fd from socket (" + fd + ")", e);
         }
 
@@ -291,7 +298,7 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
 
             switch (cmd) {
                 case "INFO":
-                /* Ignore greeting from management */
+                    /* Ignore greeting from management */
                     return;
                 case "PASSWORD":
                     processPWCommand(argument);
@@ -339,14 +346,10 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
         }
     }
 
-    private void processInfoMessage(String info)
-    {
-        if (info.startsWith("OPEN_URL:") || info.startsWith("CR_TEXT:"))
-        {
+    private void processInfoMessage(String info) {
+        if (info.startsWith("OPEN_URL:") || info.startsWith("CR_TEXT:")) {
             mOpenVPNService.trigger_sso(info);
-        }
-        else
-        {
+        } else {
             VpnStatus.logDebug("Info message from server:" + info);
         }
     }
@@ -510,7 +513,7 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
 
             VpnStatus.logInfo(R.string.using_proxy, proxyname, proxyname);
 
-            String pwstr =  usePwAuth ? " auto" : "";
+            String pwstr = usePwAuth ? " auto" : "";
 
             String proxycmd = String.format(Locale.ENGLISH, "proxy %s %s %s%s\n",
                     proxyType == Connection.ProxyType.HTTP ? "HTTP" : "SOCKS",
@@ -656,7 +659,7 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
 
             return true;
         } catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException |
-                IOException | IllegalAccessException exp) {
+                 IOException | IllegalAccessException exp) {
             VpnStatus.logException("Could not send fd over socket", exp);
         }
 
@@ -697,13 +700,13 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
             username = mProfile.mUsername;
 
         } else if (needed.equals("HTTP Proxy")) {
-            if( mCurrentProxyConnection != null) {
+            if (mCurrentProxyConnection != null) {
                 pw = mCurrentProxyConnection.mProxyAuthPassword;
                 username = mCurrentProxyConnection.mProxyAuthUser;
             }
         }
         if (pw != null) {
-            if (username !=null) {
+            if (username != null) {
                 String usercmd = String.format("username '%s' %s\n",
                         needed, VpnProfile.openVpnEscape(username));
                 managmentCommand(usercmd);
@@ -738,7 +741,7 @@ public class OpenVpnManagementThread implements Runnable, OpenVPNManagement {
 
     @Override
     public void sendCRResponse(String response) {
-        managmentCommand("cr-response "  + response + "\n");
+        managmentCommand("cr-response " + response + "\n");
     }
 
     public void signalusr1() {

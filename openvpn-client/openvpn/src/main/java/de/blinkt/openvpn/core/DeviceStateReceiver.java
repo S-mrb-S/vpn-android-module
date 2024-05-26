@@ -5,6 +5,8 @@
 
 package de.blinkt.openvpn.core;
 
+import static de.blinkt.openvpn.core.OpenVPNManagement.pauseReason;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,16 +16,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.Handler;
-import android.preference.PreferenceManager;
+
+import java.util.LinkedList;
 
 import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.core.VpnStatus.ByteCountListener;
-
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.StringTokenizer;
-
-import static de.blinkt.openvpn.core.OpenVPNManagement.pauseReason;
 
 public class DeviceStateReceiver extends BroadcastReceiver implements ByteCountListener, OpenVPNManagement.PausedStateCallback {
     private final Handler mDisconnectHandler;
@@ -222,7 +219,7 @@ public class DeviceStateReceiver extends BroadcastReceiver implements ByteCountL
             if (lastConnectedNetwork == null
                     || lastConnectedNetwork.getType() != networkInfo.getType()
                     || !equalsObj(lastConnectedNetwork.getExtraInfo(), networkInfo.getExtraInfo())
-                    )
+            )
                 sameNetwork = false;
             else
                 sameNetwork = true;

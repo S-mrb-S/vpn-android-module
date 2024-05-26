@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-
 import de.blinkt.openvpn.core.OpenVPNService;
 import de.blinkt.openvpn.core.ProfileManager;
 
@@ -67,7 +66,8 @@ public class DisconnectVPNActivity extends Activity implements DialogInterface.O
         }
         finish();
     }
-    public void stopVpn(){
+
+    public void stopVpn() {
         ProfileManager.setConntectedVpnProfileDisconnected(this);
         if (mService != null && mService.getManagement() != null) {
             mService.getManagement().stopVPN(false);

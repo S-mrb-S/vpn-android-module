@@ -6,14 +6,21 @@
 package de.blinkt.openvpn.core;
 
 import android.os.Build;
-import androidx.core.util.Pair;
 import android.text.TextUtils;
+
+import androidx.core.util.Pair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Vector;
 
 import de.blinkt.openvpn.VpnProfile;
 
@@ -123,7 +130,7 @@ public class ConfigParser {
             "http-proxy-user-pass",
             "explicit-exit-notify",
     };
-    private HashSet<String>  connectionOptionsSet = new HashSet<>(Arrays.asList(connectionOptions));
+    private HashSet<String> connectionOptionsSet = new HashSet<>(Arrays.asList(connectionOptions));
 
     private HashMap<String, Vector<Vector<String>>> options = new HashMap<>();
     private HashMap<String, Vector<String>> meta = new HashMap<String, Vector<String>>();
@@ -427,7 +434,7 @@ public class ConfigParser {
         if (direction != null)
             np.mTLSAuthDirection = direction.get(1);
 
-        for (String crypt: new String[]{"tls-crypt", "tls-crypt-v2"}) {
+        for (String crypt : new String[]{"tls-crypt", "tls-crypt-v2"}) {
             Vector<String> tlscrypt = getOption(crypt, 1, 1);
             if (tlscrypt != null) {
                 np.mUseTLSAuth = true;
@@ -724,7 +731,7 @@ public class ConfigParser {
         }
 
         // Parse OpenVPN Access Server extra
-        for (String as_name_directive: new String[]{"PROFILE", "FRIENDLY_NAME"}) {
+        for (String as_name_directive : new String[]{"PROFILE", "FRIENDLY_NAME"}) {
             Vector<String> friendlyname = meta.get(as_name_directive);
             if (friendlyname != null && friendlyname.size() > 1)
                 np.mName = friendlyname.get(1);
@@ -826,8 +833,7 @@ public class ConfigParser {
         Vector<Vector<String>> remotes = getAllOption("remote", 1, 3);
 
 
-
-        Vector <String> optionsToRemove = new Vector<>();
+        Vector<String> optionsToRemove = new Vector<>();
         // Assume that we need custom options if connectionDefault are set or in the connection specific set
         for (Map.Entry<String, Vector<Vector<String>>> option : options.entrySet()) {
             if (connDefault != null || connectionOptionsSet.contains(option.getKey())) {
@@ -835,7 +841,7 @@ public class ConfigParser {
                 optionsToRemove.add(option.getKey());
             }
         }
-        for (String o: optionsToRemove)
+        for (String o : optionsToRemove)
             options.remove(o);
 
         if (!(conn.mCustomConfiguration == null || "".equals(conn.mCustomConfiguration.trim())))
@@ -916,9 +922,8 @@ public class ConfigParser {
             options.remove(option);
 
 
-        boolean customOptions=false;
-        for (Vector<Vector<String>>  option: options.values())
-        {
+        boolean customOptions = false;
+        for (Vector<Vector<String>> option : options.values()) {
             for (Vector<String> optionsline : option) {
                 if (!ignoreThisOption(optionsline)) {
                     customOptions = true;

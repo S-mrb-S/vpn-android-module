@@ -5,7 +5,6 @@
 
 package de.blinkt.openvpn.core;
 
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +13,12 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Log;
-import de.blinkt.openvpn.BuildConfig;
-import de.blinkt.openvpn.core.VpnStatus.LogLevel;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
+
+import de.blinkt.openvpn.BuildConfig;
 
 /**
  * Created by arne on 09.11.16.

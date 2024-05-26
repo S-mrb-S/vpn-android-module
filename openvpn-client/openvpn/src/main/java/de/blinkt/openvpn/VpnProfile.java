@@ -15,12 +15,12 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.security.KeyChain;
 import android.security.KeyChainException;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import de.blinkt.openvpn.core.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.spongycastle.util.io.pem.PemObject;
 import org.spongycastle.util.io.pem.PemWriter;
 
@@ -33,7 +33,11 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -47,6 +51,16 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import de.blinkt.openvpn.core.Connection;
+import de.blinkt.openvpn.core.ExtAuthHelper;
+import de.blinkt.openvpn.core.NativeUtils;
+import de.blinkt.openvpn.core.OpenVPNService;
+import de.blinkt.openvpn.core.OrbotHelper;
+import de.blinkt.openvpn.core.PasswordCache;
+import de.blinkt.openvpn.core.VPNLaunchHelper;
+import de.blinkt.openvpn.core.VpnStatus;
+import de.blinkt.openvpn.core.X509Utils;
 
 public class VpnProfile implements Serializable, Cloneable {
     // Note that this class cannot be moved to core where it belongs since
@@ -163,7 +177,7 @@ public class VpnProfile implements Serializable, Cloneable {
     private UUID mUuid;
     private int mProfileVersion;
 
-    public boolean mBlockUnusedAddressFamilies =true;
+    public boolean mBlockUnusedAddressFamilies = true;
 
     public VpnProfile(String name) {
         mUuid = UUID.randomUUID();
@@ -274,7 +288,7 @@ public class VpnProfile implements Serializable, Cloneable {
     public void upgradeProfile() {
 
         /* Fallthrough is intended here */
-        switch(mProfileVersion) {
+        switch (mProfileVersion) {
             case 0:
             case 1:
                 /* default to the behaviour the OS used */
@@ -437,8 +451,7 @@ public class VpnProfile implements Serializable, Cloneable {
             case VpnProfile.TYPE_PKCS12:
                 cfg.append(insertFileData("pkcs12", mPKCS12Filename));
 
-                if (!TextUtils.isEmpty(mCaFilename))
-                {
+                if (!TextUtils.isEmpty(mCaFilename)) {
                     cfg.append(insertFileData("ca", mCaFilename));
                 }
                 break;
@@ -910,8 +923,9 @@ public class VpnProfile implements Serializable, Cloneable {
             }
 
             return new String[]{ca, extra, user};
-        } catch (InterruptedException | IOException | KeyChainException | NoCertReturnedException | IllegalArgumentException
-                | CertificateException e) {
+        } catch (InterruptedException | IOException | KeyChainException | NoCertReturnedException |
+                 IllegalArgumentException
+                 | CertificateException e) {
             e.printStackTrace();
             VpnStatus.logError(R.string.keyChainAccessError, e.getLocalizedMessage());
 
@@ -1195,7 +1209,7 @@ public class VpnProfile implements Serializable, Cloneable {
             }
             return signed_bytes;
         } catch (NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException
-                | BadPaddingException | NoSuchPaddingException | SignatureException e) {
+                 | BadPaddingException | NoSuchPaddingException | SignatureException e) {
             VpnStatus.logError(R.string.error_rsa_sign, e.getClass().toString(), e.getLocalizedMessage());
             return null;
         }
@@ -1221,7 +1235,8 @@ public class VpnProfile implements Serializable, Cloneable {
             // 112 with TLS 1.2 (172 back with 4.3), 36 with TLS 1.0
             return NativeUtils.rsasign(data, pkey, pkcs1padding);
 
-        } catch (NoSuchMethodException | InvalidKeyException | InvocationTargetException | IllegalAccessException | IllegalArgumentException e) {
+        } catch (NoSuchMethodException | InvalidKeyException | InvocationTargetException |
+                 IllegalAccessException | IllegalArgumentException e) {
             VpnStatus.logError(R.string.error_rsa_sign, e.getClass().toString(), e.getLocalizedMessage());
             return null;
         }

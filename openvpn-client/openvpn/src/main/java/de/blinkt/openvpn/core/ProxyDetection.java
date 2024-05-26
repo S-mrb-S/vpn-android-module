@@ -18,43 +18,43 @@ import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.VpnProfile;
 
 public class ProxyDetection {
-	static SocketAddress detectProxy(VpnProfile vp) {
-		// Construct a new url with https as protocol
-		try {
-			URL url = new URL(String.format("https://%s:%s",vp.mServerName,vp.mServerPort));
-			Proxy proxy = getFirstProxy(url);
+    static SocketAddress detectProxy(VpnProfile vp) {
+        // Construct a new url with https as protocol
+        try {
+            URL url = new URL(String.format("https://%s:%s", vp.mServerName, vp.mServerPort));
+            Proxy proxy = getFirstProxy(url);
 
-			if(proxy==null)
-				return null;
-			SocketAddress addr = proxy.address();
-			if (addr instanceof InetSocketAddress) {
-				return addr; 
-			}
-			
-		} catch (MalformedURLException e) {
-			VpnStatus.logError(R.string.getproxy_error, e.getLocalizedMessage());
-		} catch (URISyntaxException e) {
-			VpnStatus.logError(R.string.getproxy_error, e.getLocalizedMessage());
-		}
-		return null;
-	}
+            if (proxy == null)
+                return null;
+            SocketAddress addr = proxy.address();
+            if (addr instanceof InetSocketAddress) {
+                return addr;
+            }
 
-	static Proxy getFirstProxy(URL url) throws URISyntaxException {
-		System.setProperty("java.net.useSystemProxies", "true");
+        } catch (MalformedURLException e) {
+            VpnStatus.logError(R.string.getproxy_error, e.getLocalizedMessage());
+        } catch (URISyntaxException e) {
+            VpnStatus.logError(R.string.getproxy_error, e.getLocalizedMessage());
+        }
+        return null;
+    }
 
-		List<Proxy> proxylist = ProxySelector.getDefault().select(url.toURI());
+    static Proxy getFirstProxy(URL url) throws URISyntaxException {
+        System.setProperty("java.net.useSystemProxies", "true");
+
+        List<Proxy> proxylist = ProxySelector.getDefault().select(url.toURI());
 
 
-		if (proxylist != null) {
-			for (Proxy proxy: proxylist) {
-				SocketAddress addr = proxy.address();
+        if (proxylist != null) {
+            for (Proxy proxy : proxylist) {
+                SocketAddress addr = proxy.address();
 
-				if (addr != null) {
-					return proxy;
-				}
-			}
+                if (addr != null) {
+                    return proxy;
+                }
+            }
 
-		}
-		return null;
-	}
+        }
+        return null;
+    }
 }

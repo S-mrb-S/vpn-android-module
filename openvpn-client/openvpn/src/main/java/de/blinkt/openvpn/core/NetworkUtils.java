@@ -7,7 +7,12 @@ package de.blinkt.openvpn.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.*;
+import android.net.ConnectivityManager;
+import android.net.LinkAddress;
+import android.net.LinkProperties;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.text.TextUtils;
 

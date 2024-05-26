@@ -6,22 +6,30 @@
 package de.blinkt.openvpn.api;
 
 import android.annotation.TargetApi;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.RestrictionsManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import de.blinkt.openvpn.VpnProfile;
-import de.blinkt.openvpn.core.ConfigParser;
-import de.blinkt.openvpn.core.Connection;
-import de.blinkt.openvpn.core.ProfileManager;
-import de.blinkt.openvpn.core.VpnStatus;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.UUID;
+import java.util.Vector;
+
+import de.blinkt.openvpn.VpnProfile;
+import de.blinkt.openvpn.core.ConfigParser;
+import de.blinkt.openvpn.core.ProfileManager;
+import de.blinkt.openvpn.core.VpnStatus;
 
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -135,14 +143,13 @@ public class AppRestrictions {
 
         Vector<VpnProfile> profilesToRemove = new Vector<>();
         // get List of all managed profiles
-        for (VpnProfile vp: pm.getProfiles())
-        {
+        for (VpnProfile vp : pm.getProfiles()) {
             if (PROFILE_CREATOR.equals(vp.mProfileCreator)) {
                 if (!provisionedUuids.contains(vp.getUUIDString()))
                     profilesToRemove.add(vp);
             }
         }
-        for (VpnProfile vp: profilesToRemove) {
+        for (VpnProfile vp : profilesToRemove) {
             VpnStatus.logInfo("Remove with uuid: %s and name: %s since it is no longer in the list of managed profiles");
             pm.removeProfile(c, vp);
         }
@@ -151,20 +158,22 @@ public class AppRestrictions {
 
     private String prepare(String config) {
         String newLine = System.getProperty("line.separator");
-        if (!config.contains(newLine)&& !config.contains(" ")) {
+        if (!config.contains(newLine) && !config.contains(" ")) {
             try {
                 byte[] decoded = android.util.Base64.decode(config.getBytes(), android.util.Base64.DEFAULT);
-                config  = new String(decoded);
-                return config; 
-            } catch(IllegalArgumentException e) {
-               
+                config = new String(decoded);
+                return config;
+            } catch (IllegalArgumentException e) {
+
             }
         }
         return config;
-    };
-    
+    }
+
+    ;
+
     private void addProfile(Context c, String config, String uuid, String name, VpnProfile vpnProfile) {
-        config  = prepare(config);
+        config = prepare(config);
         ConfigParser cp = new ConfigParser();
         try {
             cp.parseConfig(new StringReader(config));
@@ -204,8 +213,7 @@ public class AppRestrictions {
         applyRestrictions(c);
     }
 
-    public void pauseCheckRestrictions(Context c)
-    {
+    public void pauseCheckRestrictions(Context c) {
         removeChangesListener(c);
     }
 }

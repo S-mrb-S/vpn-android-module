@@ -6,6 +6,7 @@
 package de.blinkt.openvpn.core;
 
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 
 import java.math.BigInteger;
@@ -19,11 +20,9 @@ import java.util.Vector;
 import de.blinkt.openvpn.BuildConfig;
 
 
-
 public class NetworkSpace {
 
-    static void assertTrue(boolean f)
-    {
+    static void assertTrue(boolean f) {
         if (!f)
             throw new IllegalStateException();
     }
@@ -173,7 +172,7 @@ public class NetworkSpace {
                 long part = r.mod(BigInteger.valueOf(0x10000)).longValue();
                 if (ipv6str != null || part != 0) {
                     if (ipv6str == null && !lastPart)
-                            ipv6str = ":";
+                        ipv6str = ":";
 
                     if (lastPart)
                         ipv6str = String.format(Locale.US, "%x", part, ipv6str);
@@ -253,7 +252,7 @@ public class NetworkSpace {
             // Check if it and the next of it are compatible
             IpAddress nextNet = networks.poll();
 
-            if (BuildConfig.DEBUG) assertTrue(currentNet!=null);
+            if (BuildConfig.DEBUG) assertTrue(currentNet != null);
             if (nextNet == null || currentNet.getLastAddress().compareTo(nextNet.getFirstAddress()) == -1) {
                 // Everything good, no overlapping nothing to do
                 ipsDone.add(currentNet);

@@ -22,14 +22,16 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
     public static Boolean isShowToastOpenVpn = false;
 
     protected abstract String getContentTitle();
+
     protected abstract String getChannelID();
+
     protected abstract String getChannelIDName();
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        try{
+        try {
             createNotificationChannel(this, getChannelID(), getChannelIDName());
             ContentTitle = getContentTitle();
 
@@ -37,29 +39,30 @@ public abstract class App extends sp.xray.lite.AngApplication { // extends /*com
             StatusListener mStatus = new StatusListener();
             mStatus.init(this);
             contextApplication = this;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * by MehrabSp
+     *
      * @param packageName Example: com.android.chrome
      */
     @Keep
-    public static void addDisallowedPackageApplication(String packageName){
+    public static void addDisallowedPackageApplication(String packageName) {
         appsList.add(packageName);
     }
 
-    public static void clearDisallowedPackageApplication(){
+    public static void clearDisallowedPackageApplication() {
         appsList.clear();
     }
 
-    public static void removeDisallowedPackageApplication(String packageName){
+    public static void removeDisallowedPackageApplication(String packageName) {
         appsList.remove(packageName);
     }
 
-    public static void addArrayDisallowedPackageApplication(ArrayList<String> packageList){
+    public static void addArrayDisallowedPackageApplication(ArrayList<String> packageList) {
         appsList.addAll(packageList);
     }
 

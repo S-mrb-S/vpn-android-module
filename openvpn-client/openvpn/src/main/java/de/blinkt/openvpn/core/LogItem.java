@@ -338,7 +338,7 @@ public class LogItem implements Parcelable {
             version = packageinfo.versionName;
 
         } catch (PackageManager.NameNotFoundException | CertificateException |
-                NoSuchAlgorithmException ignored) {
+                 NoSuchAlgorithmException ignored) {
         }
 
         Object[] argsext = Arrays.copyOf(mArgs, mArgs.length);

@@ -6,7 +6,6 @@
 package de.blinkt.openvpn.core;
 
 import android.os.Build;
-import de.blinkt.openvpn.BuildConfig;
 
 import java.security.InvalidKeyException;
 
@@ -17,8 +16,7 @@ public class NativeUtils {
 
     static native void jniclose(int fdint);
 
-    public static String getNativeAPI()
-    {
+    public static String getNativeAPI() {
         if (isRoboUnitTest())
             return "ROBO";
         else
@@ -32,7 +30,7 @@ public class NativeUtils {
     public static native String getOpenVPN3GitVersion();
 
     public final static int[] openSSLlengths = {
-        16, 64, 256, 1024, 8 * 1024, 16 * 1024
+            16, 64, 256, 1024, 8 * 1024, 16 * 1024
     };
 
     public static native double[] getOpenSSLSpeed(String algorithm, int testnum);
@@ -47,6 +45,7 @@ public class NativeUtils {
     }
 
     public static boolean isRoboUnitTest() {
-        return "robolectric".equals(Build.FINGERPRINT); }
+        return "robolectric".equals(Build.FINGERPRINT);
+    }
 
 }

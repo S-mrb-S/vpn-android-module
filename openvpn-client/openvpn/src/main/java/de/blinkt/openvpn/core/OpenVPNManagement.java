@@ -39,7 +39,8 @@ public interface OpenVPNManagement {
 
     /**
      * Send the response to a challenge response
-     * @param response  Base64 encoded response
+     *
+     * @param response Base64 encoded response
      */
     void sendCRResponse(String response);
 }
