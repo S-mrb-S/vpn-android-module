@@ -2,7 +2,6 @@ package sp.xray.testapplication
 
 import androidx.work.Configuration
 import com.tencent.mmkv.MMKV
-import sp.xray.lite.AngApplication
 
 class Application : sp.vpn.module.VpnApplication() {
     override fun mmkvInit() {

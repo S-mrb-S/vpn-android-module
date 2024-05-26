@@ -20,11 +20,24 @@ import sp.openconnect.fragments.FeedbackFragment;
  */
 public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManagerActivity {
 
-    protected VpnProfile CiscoVpnProfile;
-    protected VPNConnector CiscoConn = null;
-    protected OpenVpnService CiscoOpenVpnService;
+    private VpnProfile CiscoVpnProfile;
+    private VPNConnector CiscoConn = null;
+    // protected OpenVpnService CiscoOpenVpnService;
 
-    protected boolean CiscoCreateProfileWithHostName(@NonNull String hostName){
+    /**
+     * Create profile and start or stopVpn
+     */
+    protected void CiscoFabClick(@NonNull String hostName) throws Exception {
+        if(!CiscoStopVPN())
+        {
+            if(CiscoCreateProfileWithHostName(hostName))
+            {
+                CiscoStartVPNWithProfile();
+            }
+        }
+    }
+
+    protected boolean CiscoCreateProfileWithHostName(@NonNull String hostName) throws Exception {
         assert CiscoConn != null;
         try{
             Log.d("OpenConnect", "CREATE profile from remote: " + hostName);
@@ -35,10 +48,10 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
                 CiscoVpnProfile = sp.openconnect.core.ProfileManager.create(hostName);
             }
 
+            return true;
         }catch (Exception e){
-            return false;
+            throw new Exception("Error when create Cisco profile: " + e);
         }
-        return true;
     }
 
     protected void CiscoStartVPNWithProfile(){
@@ -53,29 +66,32 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
         this.startActivity(intent);
     }
 
-    protected boolean CiscoStopForceVPN(){
+    protected boolean CiscoStopVPN(){
         try{
-            CiscoConn.service.stopVPN();
-            return true;
+            if (CiscoConn.service.getConnectionState() !=
+                    OpenConnectManagementThread.STATE_DISCONNECTED) {
+                CiscoConn.service.stopVPN();
+                return true;
+            }
         }catch (Exception e){
             Log.d("OpenConnect [err]", e.toString());
         }
         return false;
     }
 
-    protected void CiscoStopOrReconnect(){
-        if (CiscoConn.service.getConnectionState() ==
-                OpenConnectManagementThread.STATE_DISCONNECTED) {
-            CiscoConn.service.startReconnectActivity(this);
-        } else {
-            CiscoConn.service.stopVPN();
-        }
+    /**
+     * Reconnect current profile or StopVpn
+     */
+    protected void CiscoReconnectVpn(){
+        CiscoStopVPN();
+        CiscoConn.service.startReconnectActivity(this);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Don't move to onResume
         CiscoConn = new VPNConnector(this, true) { // run on activity (require)
             @Override
             public void onUpdate(OpenVpnService service) {
@@ -93,7 +109,7 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
 
     @Override
     protected void onDestroy() {
-        CiscoConn.unbind();
+        CiscoConn.unbind(); // don't move to onStop
 
         super.onDestroy();
     }
@@ -106,16 +122,16 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
     }
 
     protected void CiscoUpdateCurrentInfo() {
-        Static.isEnableDialog = isEnableDialog();
-        Static.CurrentPassWord = CurrentPassWord();
-        Static.CurrentUserName = CurrentUserName();
-        Static.isSkipCert = skipCertWarning();
+        Static.isEnableDialog = CiscoIsEnableDialog();
+        Static.CurrentPassWord = CiscoCurrentPassWord();
+        Static.CurrentUserName = CiscoCurrentUserName();
+        Static.isSkipCert = CiscoSkipCertWarning();
     }
 
-    protected abstract String CurrentUserName();
-    protected abstract String CurrentPassWord();
-    protected abstract boolean isEnableDialog();
+    protected abstract String CiscoCurrentUserName();
+    protected abstract String CiscoCurrentPassWord();
+    protected abstract boolean CiscoIsEnableDialog();
     protected abstract void CiscoUpdateUI(OpenVpnService service);
-    protected abstract boolean skipCertWarning();
+    protected abstract boolean CiscoSkipCertWarning();
 
 }

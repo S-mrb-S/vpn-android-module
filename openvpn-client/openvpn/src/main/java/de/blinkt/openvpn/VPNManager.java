@@ -27,7 +27,10 @@ import java.util.Objects;
 /**
  * by MehrabSp
  * Static all
+ * Depressed
+ * use OpenVPNManagerActivity
  */
+@Deprecated
 public final class VPNManager {
 
     public interface StatusCallback {
@@ -266,18 +269,18 @@ public final class VPNManager {
         LocalBroadcastManager.getInstance(contextApplication).registerReceiver(broadcastReceiver,
                 new IntentFilter("connectionState"));
 
-        vpnStart = MmkvManager.getConnectionStorage().getBoolean("vpnStart", vpnStart);
+//        vpnStart = MmkvManager.getConnectionStorage().getBoolean("vpnStart", vpnStart);
     }
 
     public static void onPause() {
-        LocalBroadcastManager.getInstance(contextApplication).unregisterReceiver(broadcastReceiver);
+//        LocalBroadcastManager.getInstance(contextApplication).unregisterReceiver(broadcastReceiver);
     }
 
     /**
      * Save current status
      */
     public static void onStop() {
-        MmkvManager.getConnectionStorage().putBoolean("vpnStart", vpnStart);
+//        MmkvManager.getConnectionStorage().putBoolean("vpnStart", vpnStart);
     }
 
 }
