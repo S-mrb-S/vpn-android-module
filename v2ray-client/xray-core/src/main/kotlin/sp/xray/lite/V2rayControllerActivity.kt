@@ -87,8 +87,9 @@ abstract class V2rayControllerActivity : BaseActivity() {
     protected abstract fun getResultOpenVpn()
 
     // v2ray options setting
-    protected var V2rayShowSpeedNotif: Boolean = true
-    protected var V2rayDirectURLORIP: String = ""
+    // default
+    private var V2rayShowSpeedNotif: Boolean = true
+    private var V2rayDirectURLORIP: String = "domain:ir"
 
     private val mainViewModel: MainViewModel by viewModels()
 
