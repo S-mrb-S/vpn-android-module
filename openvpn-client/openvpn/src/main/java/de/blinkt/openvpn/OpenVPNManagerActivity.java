@@ -105,7 +105,8 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
             OpenVpnApi.startVpn(this, config, "Sweden", username, password);
         } catch (RemoteException e) {
             sendStatusToCallBack("START", true, e.toString());
-            e.printStackTrace();
+           // e.printStackTrace();
+            OpenVpnStopVpn();
         }
     }
 
