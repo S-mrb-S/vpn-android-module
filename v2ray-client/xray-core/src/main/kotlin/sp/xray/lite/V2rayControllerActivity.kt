@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.KeyEvent
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -30,7 +29,6 @@ import sp.xray.lite.service.V2RayServiceManager
 import sp.xray.lite.ui.AboutActivity
 import sp.xray.lite.ui.BaseActivity
 import sp.xray.lite.ui.LogcatActivity
-import sp.xray.lite.ui.RoutingSettingsFragment
 import sp.xray.lite.ui.ScannerActivity
 import sp.xray.lite.ui.ServerActivity
 import sp.xray.lite.ui.SettingsActivity
@@ -47,7 +45,10 @@ import java.util.concurrent.TimeUnit
 /**
  * by MRB
  */
-abstract class V2rayControllerActivity : BaseActivity() {
+abstract class V2rayControllerActivity(
+    getDirectUrlV2ray: String,
+    getShowSpeedBooleanV2ray: Boolean
+) : BaseActivity() {
 
     private val mainStorage by lazy {
         MMKV.mmkvWithID(
@@ -64,12 +65,13 @@ abstract class V2rayControllerActivity : BaseActivity() {
     private val requestVpnPermission =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val requestCode = it.data?.getIntExtra("REQUEST_CODE", -1)
-                if (requestCode == 5) {
-                    getResultOpenVpn()
-                } else {
-                    V2RayStart()
-                }
+                V2RayStart()
+            }
+        }
+    private val requestOpenVpnPermission =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                getResultOpenVpn()
             }
         }
 
@@ -79,8 +81,7 @@ abstract class V2rayControllerActivity : BaseActivity() {
         if (intent == null) {
             getResultOpenVpn()
         } else {
-            intent.putExtra("REQUEST_CODE", 5)
-            requestVpnPermission.launch(intent)
+            requestOpenVpnPermission.launch(intent)
         }
     }
 
@@ -88,14 +89,14 @@ abstract class V2rayControllerActivity : BaseActivity() {
 
     // v2ray options setting
     // default
-    private var V2rayShowSpeedNotif: Boolean = true
-    private var V2rayDirectURLORIP: String = "domain:ir"
+    private var v2rayShowSpeedNotif: Boolean = getShowSpeedBooleanV2ray
+    private var v2rayDirectURLORIP: String = getDirectUrlV2ray
 
     private val mainViewModel: MainViewModel by viewModels()
 
     protected fun V2rayFabClick(config: String) {
         delAndAddV2rayConfig(config)
-        if(!V2rayStop()){
+        if (!V2rayStop()) {
             if ((settingsStorage?.decodeString(AppConfig.PREF_MODE) ?: "VPN") == "VPN") {
                 val intent = VpnService.prepare(this)
                 if (intent == null) {
@@ -143,11 +144,11 @@ abstract class V2rayControllerActivity : BaseActivity() {
                 }
         }
 
-        if(settingsStorage?.decodeBool(AppConfig.PREF_SPEED_ENABLED) != V2rayShowSpeedNotif){
-            settingsStorage?.encode(AppConfig.PREF_SPEED_ENABLED, V2rayShowSpeedNotif)
+        if (settingsStorage?.decodeBool(AppConfig.PREF_SPEED_ENABLED) != v2rayShowSpeedNotif) {
+            settingsStorage?.encode(AppConfig.PREF_SPEED_ENABLED, v2rayShowSpeedNotif)
         }
-        if(settingsStorage?.decodeString(AppConfig.PREF_V2RAY_ROUTING_DIRECT) != V2rayDirectURLORIP) {
-            settingsStorage?.encode(AppConfig.PREF_V2RAY_ROUTING_DIRECT, V2rayDirectURLORIP)
+        if (settingsStorage?.decodeString(AppConfig.PREF_V2RAY_ROUTING_DIRECT) != v2rayDirectURLORIP) {
+            settingsStorage?.encode(AppConfig.PREF_V2RAY_ROUTING_DIRECT, v2rayDirectURLORIP)
         }
     }
 
@@ -212,12 +213,12 @@ abstract class V2rayControllerActivity : BaseActivity() {
     }
 
     protected fun V2rayStop(): Boolean {
-        try{
+        try {
             if (mainViewModel.isRunning.value == true) {
                 Utils.stopVService(this)
                 return true
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.d("V2ray err", e.toString())
         }
         return false

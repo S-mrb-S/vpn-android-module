@@ -22,6 +22,10 @@ public abstract class CiscoMainActivity extends de.blinkt.openvpn.OpenVPNManager
 
     private VpnProfile CiscoVpnProfile;
     private VPNConnector CiscoConn = null;
+
+    public CiscoMainActivity(@NonNull String getDirectUrlV2ray, boolean getShowSpeedBooleanV2ray) {
+        super(getDirectUrlV2ray, getShowSpeedBooleanV2ray);
+    }
     // protected OpenVpnService CiscoOpenVpnService;
 
     /**

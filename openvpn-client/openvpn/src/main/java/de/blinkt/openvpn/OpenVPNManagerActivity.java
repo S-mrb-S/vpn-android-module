@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -24,6 +25,10 @@ import de.blinkt.openvpn.core.VpnStatus;
  */
 public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControllerActivity {
     private Boolean OpenVpnIsConnected = false;
+
+    public OpenVPNManagerActivity(@NonNull String getDirectUrlV2ray, boolean getShowSpeedBooleanV2ray) {
+        super(getDirectUrlV2ray, getShowSpeedBooleanV2ray);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

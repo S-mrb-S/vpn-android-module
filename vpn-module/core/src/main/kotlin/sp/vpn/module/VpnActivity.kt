@@ -1,6 +1,8 @@
 package sp.vpn.module
 
-abstract class VpnActivity : sp.openconnect.remote.CiscoMainActivity() {
+abstract class VpnActivity(getDirectUrlV2ray: String, getShowSpeedBooleanV2ray: Boolean) : sp.openconnect.remote.CiscoMainActivity(
+    getDirectUrlV2ray, getShowSpeedBooleanV2ray
+) {
     // default cisco options
     override fun CiscoIsEnableDialog(): Boolean {
         return false // skip dialog (cisco)
