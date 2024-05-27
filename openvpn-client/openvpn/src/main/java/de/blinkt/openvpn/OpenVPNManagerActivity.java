@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -113,9 +114,18 @@ public abstract class OpenVPNManagerActivity extends sp.xray.lite.V2rayControlle
                 String status = intent.getStringExtra("state");
                 if (status != null) {
                     sendStatusToCallBack(status);
-                    if (status.equals("CONNECTED")) {
-                        OpenVpnIsConnected = true;
+                    switch (status) {
+                        case "DISCONNECTED":
+                            OpenVpnIsConnected = false;
+                            break;
+
+                        default:
+                            OpenVpnIsConnected = true;
+                            break;
                     }
+//                    if (!status.equals("DISCONNECTED")) {
+//                        OpenVpnIsConnected = true;
+//                    }
                 }
             } catch (Exception e) {
                 sendStatusToCallBack("SENDSTATUS", true, e.toString());
