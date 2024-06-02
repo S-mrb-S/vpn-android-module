@@ -20,9 +20,7 @@ abstract class AngApplication : MultiDexApplication(), Configuration.Provider {
         AppConfig.ANG_PACKAGE = angPackage()
     }
 
-    protected fun setDebugMode(isDebugMode: Boolean) {
-        AppConfig.Debug_Mode = isDebugMode
-    }
+    protected abstract fun setDebugMode(): Boolean
 
     protected abstract fun mmkvInit()
 
@@ -46,6 +44,7 @@ abstract class AngApplication : MultiDexApplication(), Configuration.Provider {
 
         //Logger.init().logLevel(if (BuildConfig.DEBUG) LogLevel.FULL else LogLevel.NONE)
         mmkvInit()
+        AppConfig.Debug_Mode = setDebugMode()
 
         Utils.setNightMode(application)
         angInit()
