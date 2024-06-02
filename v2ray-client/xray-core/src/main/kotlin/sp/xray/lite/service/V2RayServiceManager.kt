@@ -27,6 +27,7 @@ import sp.xray.lite.AppConfig
 import sp.xray.lite.AppConfig.ANG_PACKAGE
 import sp.xray.lite.AppConfig.TAG_DIRECT
 import sp.xray.lite.R
+import sp.xray.lite.V2rayControllerActivity
 import sp.xray.lite.dto.ServerConfig
 import sp.xray.lite.extension.toSpeedString
 import sp.xray.lite.extension.toast
@@ -283,7 +284,7 @@ object V2RayServiceManager {
 
     private fun showNotification() {
         val service = serviceControl?.get()?.getService() ?: return
-        val startMainIntent = Intent(service, MainActivity::class.java)
+        val startMainIntent = Intent(service, V2rayControllerActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             service,
             NOTIFICATION_PENDING_INTENT_CONTENT, startMainIntent,
