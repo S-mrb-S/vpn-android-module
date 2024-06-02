@@ -7,4 +7,7 @@ abstract class VpnApplication : sp.openconnect.Application() {
         MMKV.initialize(this)
     }
 
+    override fun setDebugMode(): Boolean {
+        return false
+    }
 }
