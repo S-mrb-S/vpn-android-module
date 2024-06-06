@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'de.blinkt.openvpn' // don't change name
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 16
@@ -49,14 +49,5 @@ android {
 }
 
 dependencies {
-   // implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation libs.localbroadcastmanager
-    implementation libs.appcompat
-
     api "sp.v2ray:xray-core"
-
-    testImplementation libs.junit
-    androidTestImplementation libs.ext.junit
-    androidTestImplementation libs.espresso.core
 }

@@ -38,7 +38,7 @@ object SpeedtestUtil {
 
     fun realPing(config: String): Long {
         return try {
-            Libv2ray.measureOutboundDelay(config) // Utils.getDelayTestUrl() // (for V2ray Lite, Not Xray)
+            Libv2ray.measureOutboundDelay(config, Utils.getDelayTestUrl())
         } catch (e: Exception) {
             Log.d(AppConfig.ANG_PACKAGE, "realPing: $e")
             -1L

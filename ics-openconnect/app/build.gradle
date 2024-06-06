@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'app.openconnect'
-    compileSdk 33
-    ndkVersion '25.1.8937393'
+    compileSdk 34
+    ndkVersion '26.1.10909125'
 
     defaultConfig {
         applicationId "app.openconnect"
         minSdkVersion 19
-        targetSdkVersion 33
+        targetSdkVersion 34
 
         versionCode 1123
         versionName '1.11.3'
@@ -71,10 +71,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 
-    implementation "androidx.webkit:webkit:1.5.0"
+    implementation "androidx.webkit:webkit:1.11.0"
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
