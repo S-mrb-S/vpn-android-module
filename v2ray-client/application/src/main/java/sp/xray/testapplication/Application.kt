@@ -5,6 +5,10 @@ import com.tencent.mmkv.MMKV
 import sp.xray.lite.AngApplication
 
 class Application : AngApplication() {
+    override fun setDebugMode(): Boolean {
+        return true
+    }
+
     override fun mmkvInit() {
         MMKV.initialize(this)
     }
