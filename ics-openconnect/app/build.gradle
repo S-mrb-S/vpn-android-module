@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     namespace 'app.openconnect'
     compileSdk 34
-    ndkVersion '25.1.8937393'
+    ndkVersion '26.1.10909125'
 
     defaultConfig {
         applicationId "app.openconnect"
