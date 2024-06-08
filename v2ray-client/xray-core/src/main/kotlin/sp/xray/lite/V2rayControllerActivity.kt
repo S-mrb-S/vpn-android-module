@@ -94,13 +94,17 @@ abstract class V2rayControllerActivity(
 
     private val mainViewModel: MainViewModel by viewModels()
 
-    protected fun V2rayFabClick(config: String) {
+    protected fun V2rayFabClick(config: String, fastClick: Boolean = false) {
         delAndAddV2rayConfig(config)
         if (!V2rayStop()) {
             if ((settingsStorage?.decodeString(AppConfig.PREF_MODE) ?: "VPN") == "VPN") {
                 val intent = VpnService.prepare(this)
                 if (intent == null) {
-                    V2RayStart()
+                    if(fastClick){
+                        V2RayRestart()
+                    }else{
+                        V2RayStart()
+                    }
                 } else {
                     requestVpnPermission.launch(intent)
                 }
