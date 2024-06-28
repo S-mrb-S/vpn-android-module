@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     namespace 'sp.openconnect'
     compileSdk 34
-    ndkVersion '26.1.10909125'
+    ndkVersion '26.3.11579264'
 
     defaultConfig {
         minSdkVersion 19
