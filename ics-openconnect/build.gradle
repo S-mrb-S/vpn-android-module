@@ -11,7 +11,11 @@ buildscript {
         google()
     }
     dependencies {
+<<<<<<< HEAD
         classpath 'com.android.tools.build:gradle:8.4.2'
+=======
+        classpath 'com.android.tools.build:gradle:8.4.1'
+>>>>>>> b4ad189e35ef946acfcddc13c6c7cd2a7aef6ccc
         
 
         // NOTE: Do not place your application dependencies here; they belong
